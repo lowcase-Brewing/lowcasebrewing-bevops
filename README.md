@@ -18,12 +18,14 @@ BevOps captures those changes to a specific “version” of your beer to
 the point where you can replicate it reliably.
 
 The purpose of BevOps is not to eliminate creativity from brewing. The
-purpose of BevOps is to document creativity so it can be repeated,
+purpose of BevOps is to document this creativity so it can be repeated,
 improved, and shared.
 
 BevOps may not be for everyone but the philosophy is rooted in
 structure, predictability, and reliability and can help any brewer make
-the best beer they wish to make.
+the best beer they wish to make. Readers should take the principles documented
+here as guidelines and not hard, fast rules. The goal of BevOps is to establish
+principles at a high level but leave room for flexibility in how they are implemented.
 
 ## Beer Development Life Cycle (BDLC)
 
