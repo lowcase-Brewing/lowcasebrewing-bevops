@@ -34,8 +34,10 @@ software.
 
 But what are these cycles? Beer is as complex as software so let’s dig
 into what this lifecycle looks like.
-
-Ideation → Recipe Architecture → Development Brew → Testing & Validation → Deployment → Monitoring & Observability → Iteration
+ 
+> Ideation → Recipe Architecture → Development Brew →
+> Testing & Validation → Deployment →
+> Monitoring & Observability → Iteration
 
 ### Ideation
 
@@ -159,7 +161,7 @@ versioning guidelines to help the brewer identify the batch and quickly
 determine where it is in the Beer Development Life Cycle (BDLC). BevOps
 defines this as “Semantic Fermentioning” or “SemFer”.
 
-As noted previously , beer changes. That’s a natural given in brewing.
+As noted previously, beer changes. That’s a natural given in brewing.
 It’s rare that a beer stays 100% the same forever. That’s just a natural
 evolution of the craft. BevOps factors that in by “versioning” batches
 and carefully documenting what changed to allow for repeatability.
@@ -244,13 +246,13 @@ Example:
 
 > **Trailhead Wit v1.1.0**
 >
-> Summary: Increase coriander from 0.5 oz to 0.75 oz
+> **Summary:** Increase coriander from 0.5 oz to 0.75 oz
 
-> Motivation: Enhance citrus aroma
+> **Motivation:** Enhance citrus aroma
 
-> Expected Outcome: More expressive nose
+> **Expected Outcome:** More expressive nose
 
-> Observed Results: Pending
+> **Observed Results:** Pending
 
 ## Service Level Indicators and Objectives (SLI/SLO)
 
@@ -300,7 +302,7 @@ Target Pre-Boil Gravity: 1.040
 
 ### Attenuation
 
-**Purpose:** Fermentation affectiveness
+**Purpose:** Fermentation effectiveness
 
 *Example:*
 
@@ -357,6 +359,15 @@ Target Pre-Boil Gravity: 1.040
 *Example:*
 
 - Target: <10%
+
+---
+
+### Enjoyment Rate
+
+Purpose:
+Percentage of batches shared with friends, family, or the community.
+
+Because BevOps exists to make better beer, but beer exists to be enjoyed.
 
 
 ## Brewing Operations Reliability Assessment (BORA)
