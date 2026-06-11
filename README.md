@@ -260,9 +260,9 @@ Example:
 
 *Example:*
 
-Batch Size: 5 gallons
-Target OG: 1.052
-Pre-Boil Volume: 6.5 gallons
+- Batch Size: 5 gallons
+- Target OG: 1.052
+- Pre-Boil Volume: 6.5 gallons
 
 Target Pre-Boil Gravity: 1.040
 
