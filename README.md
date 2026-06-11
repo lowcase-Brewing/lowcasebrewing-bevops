@@ -1,5 +1,4 @@
-### <img src="assets/media/image1.png"
-style="width:4.57813in;height:2.44313in" />
+![lowcase Brewing BevOps logo](assets/media/bevops.png)
 
 # BevOps Philosophy
 
