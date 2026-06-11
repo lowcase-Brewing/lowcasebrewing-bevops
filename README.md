@@ -260,6 +260,14 @@ Example:
 
 *Example:*
 
+Batch Size: 5 gallons
+Target OG: 1.052
+Pre-Boil Volume: 6.5 gallons
+
+Target Pre-Boil Gravity: 1.040
+
+---
+
 ### Original Gravity
 
 **Purpose:** Did the mash and boil process produce the intended wort?
@@ -267,6 +275,8 @@ Example:
 *Example:*
 
 - Target: 1.065 ± 0.003
+
+---
 
 ### Final Gravity
 
@@ -276,6 +286,8 @@ Example:
 
 > 1.010–1.012
 
+---
+
 ### Mash Efficiency
 
 **Purpose:** How effectively sugars were extracted from the grain.
@@ -283,6 +295,8 @@ Example:
 *Example:*
 
 - Target: 72–78%
+
+---
 
 ### Attenuation
 
@@ -292,6 +306,8 @@ Example:
 
 > 75–80%
 
+---
+
 ### Fermentation Duration
 
 **Purpose:** Time to production readiness.
@@ -299,6 +315,8 @@ Example:
 *Example:*
 
 > 7-10 Days
+
+---
 
 ### Temperature Stability
 
@@ -308,6 +326,8 @@ Example:
 
 - Target: 66°F ±1°F
 
+---
+
 ### Carbonation Accuracy
 
 **Purpose:** Did packaging perform correctly?
@@ -315,6 +335,8 @@ Example:
 *Example:*
 
 > 2.5 vols CO₂
+
+---
 
 ### Yield
 
@@ -325,6 +347,8 @@ Example:
 - 5 Gals Brewed
 
 - 4.75 Gals packaged
+
+---
 
 ### Packaging Loss
 
