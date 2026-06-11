@@ -242,21 +242,13 @@ Example:
 
 > **Trailhead Wit v1.1.0**
 >
-> Summary:
+> Summary: Increase coriander from 0.5 oz to 0.75 oz
 
-- Increase coriander from 0.5 oz to 0.75 oz
+> Motivation: Enhance citrus aroma
 
-> Motivation:
+> Expected Outcome: More expressive nose
 
-- Enhance citrus aroma
-
-> Expected Outcome:
-
-- More expressive nose
-
-> Observed Results:
-
-- Pending
+> Observed Results: Pending
 
 ### Service Level Indicators and Objectives (SLI/SLO)
 
