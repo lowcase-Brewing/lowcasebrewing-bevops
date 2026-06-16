@@ -1,6 +1,6 @@
-Beer Development Life Cycle (BDLC)
+# Beer Development Life Cycle (BDLC)
 
-Overview
+## Overview
 
 Beer has a lifecycle, and so it stands to reason that beer development has a lifecycle as well.
 
@@ -16,7 +16,7 @@ The lifecycle is continuous. Iteration naturally feeds back into Ideation, creat
 
 ⸻
 
-Ideation
+## Ideation
 
 Every beer starts as an idea.
 
@@ -37,7 +37,7 @@ No recipe exists without an idea.
 
 ⸻
 
-Recipe Architecture
+## Recipe Architecture
 
 Once an idea has been identified, the next step is to design the beer.
 
@@ -75,7 +75,7 @@ The recipe serves as the blueprint for the beer.
 
 ⸻
 
-Development Brew
+## Development Brew
 
 Development Brew is the execution phase of the Beer Development Life Cycle.
 
@@ -101,7 +101,7 @@ This is where theory becomes beer.
 
 ⸻
 
-Testing & Validation
+## Testing & Validation
 
 Testing & Validation determines whether the finished beer achieved its intended goals.
 
@@ -138,7 +138,7 @@ The goal is to determine whether the batch successfully delivered its intended o
 
 ⸻
 
-Deployment
+## Deployment
 
 Deployment is the process of preparing and releasing a validated beer for consumption.
 
@@ -159,7 +159,7 @@ A beer is considered deployed when it is packaged, released, and ready to be enj
 
 ⸻
 
-Monitoring & Observability
+## Monitoring & Observability
 
 Monitoring & Observability focuses on understanding how a beer performs after deployment.
 
@@ -191,7 +191,7 @@ The purpose is to generate actionable insights.
 
 ⸻
 
-Iteration
+## Iteration
 
 Iteration is the process of applying lessons learned from previous stages of the lifecycle.
 
@@ -248,7 +248,7 @@ Every batch should leave the brewer with more knowledge than they had before bre
 
 ⸻
 
-The Continuous Loop
+## The Continuous Loop
 
 The Beer Development Life Cycle is not linear.
 

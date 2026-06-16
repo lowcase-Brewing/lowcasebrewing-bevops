@@ -1,6 +1,6 @@
-Incident Reports
+# Incident Reports
 
-Overview
+## Overview
 
 Brewing is a process.
 
@@ -20,7 +20,7 @@ The objective is understanding what happened and preventing similar incidents in
 
 ⸻
 
-Why Incident Reports Matter
+## Why Incident Reports Matter
 
 Every brewer experiences problems.
 
@@ -40,7 +40,7 @@ With documentation, every incident becomes part of the brewery’s operational k
 
 ⸻
 
-What Qualifies as an Incident?
+## What Qualifies as an Incident?
 
 Not every unexpected event requires a formal Incident Report.
 
@@ -93,7 +93,7 @@ Equipment Incidents
 
 ⸻
 
-Incident Severity
+## Incident Severity
 
 Not all incidents are equal.
 
@@ -141,7 +141,7 @@ Examples:
 
 ⸻
 
-Incident Report Template
+## Incident Report Template
 
 Every Incident Report should contain the following information.
 
@@ -155,7 +155,7 @@ BEV-2026-001
 
 ⸻
 
-Summary
+## Summary
 
 Brief description of the incident.
 
@@ -165,7 +165,7 @@ Tilt telemetry pipeline stopped reporting data.
 
 ⸻
 
-Impact
+## Impact
 
 Description of the consequences.
 
@@ -176,7 +176,7 @@ No impact to beer quality.
 
 ⸻
 
-Root Cause
+## Root Cause
 
 Explanation of why the incident occurred.
 
@@ -186,7 +186,7 @@ Tilt Pico was accidentally unplugged during cleaning.
 
 ⸻
 
-Resolution
+## Resolution
 
 Actions taken to resolve the issue.
 
@@ -196,7 +196,7 @@ Reconnected Tilt Pico and verified telemetry flow.
 
 ⸻
 
-Preventive Actions
+## Preventive Actions
 
 Changes introduced to prevent recurrence.
 
@@ -206,7 +206,7 @@ Added telemetry verification to brew day checklist.
 
 ⸻
 
-Example Incident Report
+## Example Incident Report
 
 BEV-2026-001
 
@@ -226,7 +226,7 @@ Resolved
 
 ⸻
 
-Blameless Postmortems
+## Blameless Postmortems
 
 One of the core principles of DevOps is the concept of the blameless postmortem.
 
@@ -250,7 +250,7 @@ An unhelpful Incident Report simply identifies a person.
 
 ⸻
 
-Incident Trends
+## Incident Trends
 
 Individual incidents are useful.
 
@@ -269,7 +269,7 @@ These patterns often reveal opportunities for operational improvement.
 
 ⸻
 
-The Goal of Incident Reports
+## The Goal of Incident Reports
 
 The purpose of Incident Reports is not to document failure.
 

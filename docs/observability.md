@@ -1,6 +1,6 @@
-Observability & Metrics
+# Observability & Metrics
 
-Overview
+## Overview
 
 Observability is the practice of understanding why a brewing process behaves the way it does.
 
@@ -20,7 +20,7 @@ The goal is to generate actionable insights.
 
 ⸻
 
-Monitoring vs Observability
+## Monitoring vs Observability
 
 These terms are often used interchangeably, but they serve different purposes.
 
@@ -41,7 +41,7 @@ Monitoring focuses on known metrics and known conditions.
 
 ⸻
 
-Observability
+## Observability
 
 Observability answers:
 
@@ -58,11 +58,11 @@ Observability focuses on understanding relationships between measurements, proce
 
 ⸻
 
-The Three Pillars of Brewing Observability
+## The Three Pillars of Brewing Observability
 
 BevOps adapts a concept commonly used in software operations known as the Three Pillars of Observability.
 
-Metrics
+### Metrics
 
 Quantitative measurements collected throughout the brewing process.
 
@@ -79,7 +79,7 @@ Metrics provide objective visibility into brewing performance.
 
 ⸻
 
-Events
+### Events
 
 Significant occurrences during the brewing process.
 
@@ -97,7 +97,7 @@ Without events, measurements often lack meaning.
 
 ⸻
 
-Logs
+### Logs
 
 Human-recorded observations and notes.
 
@@ -112,7 +112,7 @@ Logs capture information that cannot always be measured automatically.
 
 ⸻
 
-Observability Data Sources
+## Observability Data Sources
 
 Brewers may collect data from a variety of sources.
 
@@ -149,7 +149,7 @@ Every source contributes to overall observability.
 
 ⸻
 
-Brewing Telemetry
+## Brewing Telemetry
 
 Telemetry is the automated collection of brewing data.
 
@@ -180,7 +180,7 @@ The objective is visibility.
 
 ⸻
 
-Observability Workflows
+## Observability Workflows
 
 Observability becomes most valuable when data is used to answer meaningful questions.
 
@@ -197,7 +197,7 @@ But incomplete.
 
 ⸻
 
-Observability
+## Observability
 
 Mash Temperature = 150°F
 Attenuation = 79%

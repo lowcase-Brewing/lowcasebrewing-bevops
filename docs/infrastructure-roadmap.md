@@ -1,6 +1,6 @@
-Infrastructure Roadmap
+# Infrastructure Roadmap
 
-Overview
+## Overview
 
 One of the goals of BevOps is to improve observability and operational awareness throughout the brewing process.
 
@@ -14,7 +14,7 @@ The objective is to identify areas where technology can improve repeatability, o
 
 ⸻
 
-Current Status
+## Current Status
 
 Infrastructure guidance is currently under development.
 
@@ -22,7 +22,7 @@ Future versions of the BevOps Handbook will expand this section with reference a
 
 ⸻
 
-Planned Topics
+## Planned Topics
 
 Telemetry Collection
 
@@ -38,7 +38,7 @@ Examples:
 
 ⸻
 
-Data Storage
+## Data Storage
 
 Methods for preserving brewing data for future analysis.
 
@@ -51,7 +51,7 @@ Examples:
 
 ⸻
 
-Observability Platforms
+## Observability Platforms
 
 Tools used to visualize and analyze brewing metrics.
 
@@ -64,7 +64,7 @@ Examples:
 
 ⸻
 
-Alerting
+## Alerting
 
 Methods for detecting and responding to brewing incidents.
 
@@ -76,7 +76,7 @@ Examples:
 
 ⸻
 
-Automation
+## Automation
 
 Infrastructure that reduces manual effort and improves consistency.
 
@@ -89,7 +89,7 @@ Examples:
 
 ⸻
 
-Homebrew Reference Architecture
+## Homebrew Reference Architecture
 
 Example BevOps implementations for:
 
@@ -100,7 +100,7 @@ Example BevOps implementations for:
 
 ⸻
 
-Guiding Principles
+## Guiding Principles
 
 When evaluating infrastructure solutions, BevOps encourages brewers to prioritize:
 
@@ -116,7 +116,7 @@ Technology should never become the objective.
 
 ⸻
 
-Future Direction
+## Future Direction
 
 As observability practices mature within the BevOps framework, this roadmap will evolve into a collection of recommended architectures, implementation examples, and operational patterns.
 

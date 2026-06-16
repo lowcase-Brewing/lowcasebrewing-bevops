@@ -1,6 +1,6 @@
-Release Notes
+# Release Notes
 
-Overview
+## Overview
 
 One of the core principles of BevOps is documenting change.
 
@@ -23,7 +23,7 @@ The objective is to preserve knowledge and make future decisions easier.
 
 ⸻
 
-Why Release Notes Matter
+## Why Release Notes Matter
 
 Imagine brewing a hefeweizen that turns out exactly the way you wanted.
 
@@ -42,7 +42,7 @@ Release Notes transform those assumptions into documented facts.
 
 ⸻
 
-Relationship to SemFer
+## Relationship to SemFer
 
 Every SemFer version should be accompanied by Release Notes.
 
@@ -66,7 +66,7 @@ Together they provide a complete history of recipe evolution.
 
 ⸻
 
-Required Fields
+## Required Fields
 
 All BevOps Release Notes should include the following information.
 
@@ -80,7 +80,7 @@ Increase coriander addition from 0.50 oz to 0.75 oz.
 
 ⸻
 
-Motivation
+## Motivation
 
 The reason the change was introduced.
 
@@ -90,7 +90,7 @@ Enhance citrus character and improve aroma expression.
 
 ⸻
 
-Expected Outcome
+## Expected Outcome
 
 The anticipated result of the change.
 
@@ -100,7 +100,7 @@ More expressive nose with improved citrus perception.
 
 ⸻
 
-Optional Fields
+## Optional Fields
 
 The following fields are recommended but not required.
 
@@ -115,7 +115,7 @@ Coriander became more noticeable but remained balanced.
 
 ⸻
 
-Rollback Plan
+## Rollback Plan
 
 What action should be taken if the change does not achieve the desired outcome.
 
@@ -125,7 +125,7 @@ Return coriander addition to 0.50 oz.
 
 ⸻
 
-Related Incidents
+## Related Incidents
 
 References to any Incident Reports that influenced the release.
 
@@ -136,7 +136,7 @@ Fermentation temperature exceeded target range.
 
 ⸻
 
-Related Metrics
+## Related Metrics
 
 Metrics used to validate the change.
 
@@ -148,7 +148,7 @@ Beer Satisfaction Score
 
 ⸻
 
-Release Note Template
+## Release Note Template
 
 Beer:
 Version:
@@ -160,7 +160,7 @@ Rollback Plan:
 
 ⸻
 
-Example Release
+## Example Release
 
 Trailhead Wit v1.1.0
 
@@ -179,7 +179,7 @@ Return coriander addition to 0.50 oz if spice character becomes excessive.
 
 ⸻
 
-Release Notes as Brewing History
+## Release Notes as Brewing History
 
 Over time, Release Notes become more than operational records.
 
@@ -202,7 +202,7 @@ Viewed together, these entries tell the story of continuous improvement.
 
 ⸻
 
-The Goal of Release Notes
+## The Goal of Release Notes
 
 The purpose of Release Notes is not documentation.
 

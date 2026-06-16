@@ -1,6 +1,6 @@
-Service Level Indicators and Objectives (SLI/SLO)
+# Service Level Indicators and Objectives (SLI/SLO)
 
-Overview
+## Overview
 
 Modern operational frameworks rely on measurable indicators to determine whether systems are performing as expected.
 
@@ -22,7 +22,7 @@ The purpose is to create visibility into process performance and improve consist
 
 ⸻
 
-What is an SLI?
+## What is an SLI?
 
 A Service Level Indicator (SLI) is a measurable characteristic of a brewing process or finished beer.
 
@@ -41,7 +41,7 @@ What should we measure?
 
 ⸻
 
-What is an SLO?
+## What is an SLO?
 
 A Service Level Objective (SLO) defines the acceptable range or target for an SLI.
 
@@ -60,7 +60,7 @@ What does success look like?
 
 ⸻
 
-Why SLI/SLOs Matter
+## Why SLI/SLOs Matter
 
 Without measurable targets, it becomes difficult to determine whether a process is improving.
 
@@ -76,13 +76,13 @@ This distinction is at the heart of BevOps.
 
 ⸻
 
-Brewing Process SLIs
+## Brewing Process SLIs
 
 These metrics help evaluate process performance throughout the Beer Development Life Cycle.
 
 ⸻
 
-Pre-Boil Gravity
+### Pre-Boil Gravity
 
 Purpose
 
@@ -103,7 +103,7 @@ Example SLO
 
 ⸻
 
-Original Gravity (OG)
+### Original Gravity (OG)
 
 Purpose
 
@@ -115,7 +115,7 @@ Example SLO
 
 ⸻
 
-Final Gravity (FG)
+### Final Gravity (FG)
 
 Purpose
 
@@ -127,7 +127,7 @@ Example SLO
 
 ⸻
 
-Mash Efficiency
+### Mash Efficiency
 
 Purpose
 
@@ -139,7 +139,7 @@ Example SLO
 
 ⸻
 
-Attenuation
+### Attenuation
 
 Purpose
 
@@ -153,7 +153,7 @@ Example SLO
 
 ⸻
 
-Fermentation Duration
+### Fermentation Duration
 
 Purpose
 
@@ -165,7 +165,7 @@ Example SLO
 
 ⸻
 
-Temperature Stability
+### Temperature Stability
 
 Purpose
 
@@ -177,13 +177,13 @@ Example SLO
 
 ⸻
 
-Packaging SLIs
+## Packaging SLIs
 
 These metrics evaluate post-fermentation performance.
 
 ⸻
 
-Carbonation Accuracy
+### Carbonation Accuracy
 
 Purpose
 
@@ -195,7 +195,7 @@ Example SLO
 
 ⸻
 
-Yield
+### Yield
 
 Purpose
 
@@ -212,7 +212,7 @@ Example SLO
 
 ⸻
 
-Packaging Loss
+### Packaging Loss
 
 Purpose
 
@@ -224,13 +224,13 @@ Example SLO
 
 ⸻
 
-Quality SLIs
+## Quality SLIs
 
 These metrics evaluate the final product.
 
 ⸻
 
-Clarity Score
+### Clarity Score
 
 Purpose
 
@@ -248,7 +248,7 @@ Certain styles intentionally target haze and should be evaluated accordingly.
 
 ⸻
 
-Head Retention
+### Head Retention
 
 Purpose
 
@@ -260,7 +260,7 @@ Example SLO
 
 ⸻
 
-Aroma Retention
+### Aroma Retention
 
 Purpose
 
@@ -274,13 +274,13 @@ Example Evaluation Periods
 
 ⸻
 
-Business SLIs
+## Business SLIs
 
 These metrics evaluate success from the brewer’s perspective.
 
 ⸻
 
-Beer Satisfaction Score (BSS)
+### Beer Satisfaction Score (BSS)
 
 Purpose
 
@@ -298,7 +298,7 @@ Example Scale
 
 ⸻
 
-Enjoyment Rate
+### Enjoyment Rate
 
 Purpose
 
@@ -316,7 +316,7 @@ Enjoyment Rate: 80%
 
 ⸻
 
-Defining Your Own SLOs
+## Defining Your Own SLOs
 
 Not all breweries have the same goals.
 
@@ -332,7 +332,7 @@ The important thing is measuring progress toward that target.
 
 ⸻
 
-The Goal of SLI/SLOs
+## The Goal of SLI/SLOs
 
 The purpose of SLI/SLO tracking is not to create spreadsheets.
 

@@ -1,6 +1,6 @@
-Semantic Fermentioning (SemFer)
+# Semantic Fermentioning (SemFer)
 
-Overview
+## Overview
 
 Good brewers keep detailed brew logs for their batches. These records help brewers understand what happened, identify opportunities for improvement, and reproduce successful results.
 
@@ -14,7 +14,7 @@ The objective of SemFer is to make recipe evolution intentional, documented, and
 
 ⸻
 
-Why SemFer Exists
+## Why SemFer Exists
 
 Beer changes.
 
@@ -35,7 +35,7 @@ A brewer should be able to look at a recipe version and immediately understand t
 
 ⸻
 
-SemFer Principles
+## SemFer Principles
 
 Semantic Fermentioning follows a simple philosophy:
 
@@ -51,7 +51,7 @@ SemFer provides a structure for distinguishing between those changes.
 
 ⸻
 
-Version Structure
+## Version Structure
 
 SemFer follows the format:
 
@@ -69,7 +69,7 @@ Where:
 
 ⸻
 
-Experimental Releases
+## Experimental Releases
 
 Recipes that are still under active development should use the following format:
 
@@ -92,7 +92,7 @@ Typical examples include:
 
 ⸻
 
-Major Releases
+## Major Releases
 
 Major releases represent significant changes to the identity of a beer.
 
@@ -121,7 +121,7 @@ The resulting beer may still share the same name, but it should be considered a 
 
 ⸻
 
-Minor Releases
+## Minor Releases
 
 Minor releases represent recipe refinements that intentionally affect flavor, aroma, body, or mouthfeel while preserving the overall identity of the beer.
 
@@ -149,7 +149,7 @@ The beer remains recognizably the same beer, but the drinking experience has bee
 
 ⸻
 
-Patch Releases
+## Patch Releases
 
 Patch releases represent operational improvements that do not intentionally alter the flavor profile of the beer.
 
@@ -177,7 +177,7 @@ The objective of a patch release is improved consistency, efficiency, or reliabi
 
 ⸻
 
-Status Designations
+## Status Designations
 
 In addition to version numbers, BevOps defines status designations that communicate the maturity of a recipe.
 
@@ -211,7 +211,7 @@ Recipe has been retired and is maintained for historical reference.
 
 ⸻
 
-Example
+## Example
 
 Beer: Agave Drift
 Version: v0.3.0
@@ -225,7 +225,7 @@ Status: LTS
 
 ⸻
 
-SemFer and Release Notes
+## SemFer and Release Notes
 
 Every SemFer version should be accompanied by release notes describing what changed and why.
 
@@ -237,7 +237,7 @@ Together they provide a complete history of the beer’s evolution.
 
 ⸻
 
-The Goal of SemFer
+## The Goal of SemFer
 
 The purpose of Semantic Fermentioning is not to create additional documentation for its own sake.
 

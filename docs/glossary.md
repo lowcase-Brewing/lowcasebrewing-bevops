@@ -1,20 +1,20 @@
-Glossary
+# Glossary
 
-B
+## B
 
-Batch Review
+### Batch Review
 
 A structured evaluation performed after a beer has been brewed, deployed, and observed. Batch Reviews summarize performance, lessons learned, and opportunities for future iteration.
 
 ⸻
 
-BDD (Beer-Driven Development)
+### BDD (Beer-Driven Development)
 
 An unofficial BevOps philosophy suggesting that brewing decisions should be informed by feedback, observations, and real-world outcomes rather than assumptions alone.
 
 ⸻
 
-BDLC (Beer Development Life Cycle)
+### BDLC (Beer Development Life Cycle)
 
 The framework used by BevOps to describe the lifecycle of a beer from concept through iteration.
 
@@ -30,7 +30,7 @@ Stages include:
 
 ⸻
 
-Beer Satisfaction Score (BSS)
+### Beer Satisfaction Score (BSS)
 
 A subjective metric used to evaluate overall satisfaction with a beer and determine whether it should be brewed again.
 
@@ -42,13 +42,13 @@ Typical scale:
 
 ⸻
 
-BevOps
+### BevOps
 
 The application of DevOps-inspired principles to brewing in order to improve repeatability, observability, and continuous improvement while preserving creativity and enjoyment.
 
 ⸻
 
-BORA (Brewing Operations Reliability Assessment)
+### BORA (Brewing Operations Reliability Assessment)
 
 A collection of operational metrics used to evaluate the effectiveness, consistency, and reliability of a brewing operation.
 
@@ -56,9 +56,9 @@ BORA measures brewery performance in the same way SLI/SLO metrics measure batch 
 
 ⸻
 
-D
+## D
 
-Deployment
+### Deployment
 
 The BDLC phase in which a validated beer is packaged, conditioned, labeled, and made available for consumption.
 
@@ -70,7 +70,7 @@ Examples:
 
 ⸻
 
-Development Brew
+### Development Brew
 
 The BDLC phase where a recipe is transformed into a physical batch of beer through brewing and fermentation activities.
 
@@ -78,9 +78,9 @@ This is where theory becomes beer.
 
 ⸻
 
-I
+## I
 
-Ideation
+### Ideation
 
 The earliest phase of the BDLC where beer concepts, recipe ideas, and experiments are conceived.
 
@@ -88,7 +88,7 @@ Every beer begins as an idea.
 
 ⸻
 
-Incident Report
+### Incident Report
 
 A structured document describing an unexpected event that affected a batch, process, system, or brewing operation.
 
@@ -96,7 +96,7 @@ Incident Reports focus on learning and prevention rather than assigning blame.
 
 ⸻
 
-Iteration
+### Iteration
 
 The process of applying lessons learned from brewing, deployment, monitoring, and observation to improve future versions of a beer.
 
@@ -104,29 +104,29 @@ Iteration is the engine that drives continuous improvement.
 
 ⸻
 
-L
+## L
 
-Lead Time for Changes
+### Lead Time for Changes
 
 A BORA metric that measures how long it takes for an idea to become a finished beer ready for evaluation.
 
 ⸻
 
-LTS (Long-Term Stable)
+### LTS (Long-Term Stable)
 
 A recipe status designation indicating a mature recipe with minimal expected changes.
 
 ⸻
 
-M
+## M
 
-Mean Time To Recovery (MTTR)
+### Mean Time To Recovery (MTTR)
 
 A BORA metric that measures how quickly a brewery recovers from incidents such as equipment failures, stalled fermentations, or failed batches.
 
 ⸻
 
-Monitoring
+### Monitoring
 
 The collection and evaluation of brewing metrics to understand what happened during a batch.
 
@@ -136,9 +136,9 @@ What happened?
 
 ⸻
 
-O
+## O
 
-Observability
+## Observability
 
 The ability to understand why a batch behaved the way it did by analyzing metrics, observations, release notes, and historical data.
 
@@ -148,15 +148,15 @@ Why did it happen?
 
 ⸻
 
-Operational Consistency Score
+### Operational Consistency Score
 
 A BORA metric that measures how consistently brewing targets are achieved across batches.
 
 ⸻
 
-P
+### P
 
-Patch Release
+## Patch Release
 
 A SemFer release that introduces operational improvements without intentionally affecting flavor, aroma, body, or mouthfeel.
 
@@ -166,7 +166,7 @@ v1.0.1
 
 ⸻
 
-Production Release
+## Production Release
 
 A recipe release intended for repeat brewing and considered stable enough for regular production.
 
@@ -176,9 +176,9 @@ v1.0.0
 
 ⸻
 
-R
+## R
 
-Recipe Architecture
+### Recipe Architecture
 
 The BDLC phase where ingredients, processes, and expected outcomes are designed and documented.
 
@@ -186,27 +186,27 @@ The blueprint for a beer.
 
 ⸻
 
-Recipe Stability Index (RSI)
+### Recipe Stability Index (RSI)
 
 A BORA metric used to evaluate how frequently a recipe changes over time.
 
 ⸻
 
-Release Notes
+### Release Notes
 
 Documentation describing what changed between recipe versions, why the change was made, and what outcome was expected.
 
 ⸻
 
-Rebrew Rate
+### Rebrew Rate
 
 A BORA metric that measures how frequently a recipe is brewed again.
 
 ⸻
 
-S
+## S
 
-SemFer (Semantic Fermentioning)
+### SemFer (Semantic Fermentioning)
 
 The BevOps versioning methodology used to track recipe and process changes over time.
 
@@ -216,7 +216,7 @@ MAJOR.MINOR.PATCH
 
 ⸻
 
-Service Level Indicator (SLI)
+### Service Level Indicator (SLI)
 
 A measurable characteristic of a brewing process or finished beer.
 
@@ -229,7 +229,7 @@ Examples:
 
 ⸻
 
-Service Level Objective (SLO)
+### Service Level Objective (SLO)
 
 A target or acceptable range for an SLI.
 
@@ -240,23 +240,23 @@ Attenuation = 75–80%
 
 ⸻
 
-Stable
+### Stable
 
 A recipe status designation indicating a recipe is approved for repeat brewing and considered production-ready.
 
 ⸻
 
-T
+## T
 
-Testing & Validation
+### Testing & Validation
 
 The BDLC phase where a beer is evaluated against recipe expectations, quality objectives, and brewer goals.
 
 ⸻
 
-V
+## V
 
-Version
+### Version
 
 A specific release of a beer identified through Semantic Fermentioning.
 
@@ -269,9 +269,9 @@ v2.0.0
 
 ⸻
 
-W
+## W
 
-Wort
+### Wort
 
 The sugar-rich liquid produced during the brewing process prior to fermentation.
 
@@ -279,9 +279,9 @@ Wort becomes beer after yeast is introduced and fermentation begins.
 
 ⸻
 
-Y
+## Y
 
-Yield
+### Yield
 
 The amount of finished beer successfully packaged after brewing and fermentation.
 
@@ -294,7 +294,7 @@ Packaged: 4.75 gallons
 
 ⸻
 
-Closing Thoughts
+## Closing Thoughts
 
 BevOps is a living framework and its vocabulary will continue to evolve alongside it.
 

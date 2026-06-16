@@ -1,6 +1,6 @@
-Brewing Operations Reliability Assessment (BORA)
+# Brewing Operations Reliability Assessment (BORA)
 
-Overview
+## Overview
 
 Brewing Operations Reliability Assessment (BORA) is a collection of operational metrics used to evaluate the health, effectiveness, and reliability of a brewing operation.
 
@@ -18,7 +18,7 @@ The purpose of BORA is to provide visibility into brewing operations and establi
 
 ⸻
 
-Why BORA Exists
+## Why BORA Exists
 
 A brewery can consistently produce great beer while operating inefficiently.
 
@@ -34,7 +34,7 @@ BORA provides a way to evaluate the effectiveness of those operational practices
 
 ⸻
 
-What Makes a Good BORA Metric?
+## What Makes a Good BORA Metric?
 
 A useful BORA metric should:
 
@@ -50,13 +50,13 @@ The objective is to identify the metrics that best reflect the health of the bre
 
 ⸻
 
-Core BORA Metrics
+## Core BORA Metrics
 
 The following metrics form the foundation of Brewing Operations Reliability Assessment.
 
 ⸻
 
-Deployment Frequency
+### Deployment Frequency
 
 Purpose
 
@@ -76,7 +76,7 @@ Questions Answered
 
 ⸻
 
-Lead Time for Changes
+### Lead Time for Changes
 
 Purpose
 
@@ -98,7 +98,7 @@ Questions Answered
 
 ⸻
 
-Change Failure Rate
+### Change Failure Rate
 
 Purpose
 
@@ -125,7 +125,7 @@ Questions Answered
 
 ⸻
 
-Mean Time To Recovery (MTTR)
+### Mean Time To Recovery (MTTR)
 
 Purpose
 
@@ -153,13 +153,13 @@ Questions Answered
 
 ⸻
 
-Recipe Health Metrics
+## Recipe Health Metrics
 
 These metrics help evaluate the maturity and stability of recipes.
 
 ⸻
 
-Recipe Stability Index (RSI)
+### Recipe Stability Index (RSI)
 
 Purpose
 
@@ -188,7 +188,7 @@ Questions Answered
 
 ⸻
 
-Rebrew Rate
+### Rebrew Rate
 
 Purpose
 
@@ -210,13 +210,13 @@ Questions Answered
 
 ⸻
 
-Operational Metrics
+## Operational Metrics
 
 These metrics evaluate the consistency of brewing operations.
 
 ⸻
 
-Operational Consistency Score
+### Operational Consistency Score
 
 Purpose
 
@@ -246,7 +246,7 @@ Questions Answered
 
 ⸻
 
-Documentation Coverage
+### Documentation Coverage
 
 Purpose
 
@@ -276,7 +276,7 @@ Questions Answered
 
 ⸻
 
-Human Metrics
+## Human Metrics
 
 Not everything important can be measured by gravity readings and fermentation curves.
 
@@ -284,7 +284,7 @@ Some of the most valuable indicators are subjective.
 
 ⸻
 
-Beer Satisfaction Score (BSS)
+### Beer Satisfaction Score (BSS)
 
 Purpose
 
@@ -308,7 +308,7 @@ Questions Answered
 
 ⸻
 
-Enjoyment Rate
+### Enjoyment Rate
 
 Purpose
 
@@ -332,7 +332,7 @@ Questions Answered
 
 ⸻
 
-Choosing BORA Metrics
+## Choosing BORA Metrics
 
 Not every brewery will track every metric.
 
@@ -344,7 +344,7 @@ BevOps encourages brewers to select metrics that align with their goals while ma
 
 ⸻
 
-The Goal of BORA
+## The Goal of BORA
 
 The purpose of BORA is not to create more dashboards.
 
