@@ -1,6 +1,6 @@
-BevOps Philosophy
+# BevOps Philosophy
 
-What is BevOps?
+## What is BevOps?
 
 BevOps is the application of DevOps-inspired principles to brewing. At its core, BevOps seeks to improve repeatability, observability, and continuous improvement while preserving the creativity and experimentation that make homebrewing enjoyable.
 
@@ -10,7 +10,7 @@ Brew → Iterate → Improve → Enjoy
 
 ⸻
 
-Why BevOps Exists
+## Why BevOps Exists
 
 Beer is brewed under a wide range of conditions. A recipe brewed today may not be identical to the same recipe brewed six months from now.
 
@@ -26,7 +26,7 @@ By documenting recipes, processes, observations, and outcomes, brewers can bette
 
 ⸻
 
-Creativity Through Documentation
+## Creativity Through Documentation
 
 The purpose of BevOps is not to eliminate creativity from brewing.
 
@@ -42,7 +42,7 @@ Both outcomes have value.
 
 ⸻
 
-Continuous Improvement
+## Continuous Improvement
 
 Every batch of beer produces information.
 
@@ -58,7 +58,7 @@ Each batch should leave the brewer with more knowledge than they had before brew
 
 ⸻
 
-Principles of BevOps
+## Principles of BevOps
 
 Repeatability
 
@@ -96,7 +96,7 @@ No amount of documentation, telemetry, dashboards, or metrics should distract fr
 
 ⸻
 
-A Living Framework
+## A Living Framework
 
 BevOps is intended to evolve.
 
