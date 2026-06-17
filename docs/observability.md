@@ -191,13 +191,11 @@ Monitoring
 OG = 1.052
 FG = 1.011
 
-Useful.
-
-But incomplete.
+Useful, but incomplete.
 
 ⸻
 
-## Observability
+### Observability
 
 Mash Temperature = 150°F
 Attenuation = 79%
@@ -205,21 +203,16 @@ Compared to:
 Mash Temperature = 152°F
 Attenuation = 74%
 
-Observation:
+Observation: Lower mash temperatures increased attenuation.
 
-Lower mash temperatures increased attenuation.
+Insight: Mash temperature influences perceived dryness.
 
-Insight:
-
-Mash temperature influences perceived dryness.
-
-Action:
-
-Adjust future mash schedules accordingly.
+Action: Adjust future mash schedules accordingly.
 
 This is where data becomes knowledge.
+
 ---
-## Dashboards
+### Dashboards
 Dashboards provide visual access to brewing metrics and trends.
 Potential dashboard metrics include:
 - Gravity
@@ -234,18 +227,22 @@ Examples:
 - Brewfather
 - Custom Dashboards
 A dashboard should provide clarity, not complexity.
+
 ---
-## Alerting
-Observability should not only help brewers understand the past.
-It should help identify issues in the present.
+
+### Alerting
+Observability should not only help brewers understand the past. It should help identify issues in the present.
+
 Examples:
 - Fermentation temperature outside target range
 - Unexpected gravity readings
 - Telemetry failures
 - Data collection interruptions
 The goal is early detection and faster recovery.
+
 ---
-## Observability Maturity
+
+### Observability Maturity
 BevOps recognizes that brewers operate at different levels of sophistication.
 ### Level 1 — Manual
 - Brew logs
@@ -272,27 +269,16 @@ Every level provides value.
 The goal is progress, not perfection.
 ---
 ## The Goal of Observability
-The purpose of observability is not to create more dashboards.
-The purpose of observability is understanding.
-Metrics become information.
-Information becomes knowledge.
-Knowledge becomes improvement.
-A brewer who understands why a beer behaves the way it does is better equipped to improve future batches.
-In BevOps, observability transforms brewing from a collection of isolated events into a continuously improving system.
-**Measure → Observe → Learn → Improve**
-:::
-What I really like about this chapter is that it naturally gives you a place later to document your actual lowcase Brewing stack:
-```text
-Tilt Hydrometer
-    ↓
-Tilt Pico
-    ↓
-Google Sheets
-    ↓
-Python Importer
-    ↓
-InfluxDB
-    ↓
-Grafana
+The purpose of observability is not to create more dashboards. The purpose of observability is understanding.
 
-That’s not just brewing anymore—that’s a brewery observability platform. 😄🍺📈🚀
+Metrics become information.
+
+Information becomes knowledge.
+
+Knowledge becomes improvement.
+
+A brewer who understands why a beer behaves the way it does is better equipped to improve future batches.
+
+In BevOps, observability transforms brewing from a collection of isolated events into a continuously improving system.
+
+**Measure → Observe → Learn → Improve**
