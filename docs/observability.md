@@ -248,24 +248,30 @@ BevOps recognizes that brewers operate at different levels of sophistication.
 - Brew logs
 - Handwritten notes
 - Hydrometer readings
+
 ### Level 2 — Digital
 - Spreadsheets
 - Digital logs
 - Basic charts
+
 ### Level 3 — Telemetry
 - Automated gravity collection
 - Temperature monitoring
 - Continuous data collection
+
 ### Level 4 — Observable Brewery
 - Time-series databases
 - Dashboards
 - Alerting
 - Historical analysis
+
 ### Level 5 — Data-Driven Brewing
 - Continuous improvement informed by operational metrics
 - Repeatable experimentation
 - Integrated observability practices
+
 Every level provides value.
+
 The goal is progress, not perfection.
 ---
 ## The Goal of Observability
