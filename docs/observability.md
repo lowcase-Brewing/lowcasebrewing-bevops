@@ -270,9 +270,8 @@ BevOps recognizes that brewers operate at different levels of sophistication.
 - Repeatable experimentation
 - Integrated observability practices
 
-Every level provides value.
+Every level provides value. The goal is progress, not perfection
 
-The goal is progress, not perfection.
 ---
 ## The Goal of Observability
 The purpose of observability is not to create more dashboards. The purpose of observability is understanding.
