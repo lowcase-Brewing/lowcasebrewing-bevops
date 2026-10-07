@@ -1,4 +1,7 @@
-# BevOps Philosophy
+---
+layout: page
+title: BevOps Philosophy
+---
 
 ## What is BevOps?
 

@@ -1,4 +1,7 @@
-# Glossary
+---
+layout: page
+title: Glossary
+---
 
 ## B
 
