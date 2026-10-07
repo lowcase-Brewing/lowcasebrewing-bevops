@@ -141,7 +141,7 @@ What happened?
 
 ## O
 
-## Observability
+### Observability
 
 The ability to understand why a batch behaved the way it did by analyzing metrics, observations, release notes, and historical data.
 
@@ -157,9 +157,9 @@ A BORA metric that measures how consistently brewing targets are achieved across
 
 ⸻
 
-### P
+## P
 
-## Patch Release
+### Patch Release
 
 A SemFer release that introduces operational improvements without intentionally affecting flavor, aroma, body, or mouthfeel.
 
@@ -169,7 +169,7 @@ v1.0.1
 
 ⸻
 
-## Production Release
+### Production Release
 
 A recipe release intended for repeat brewing and considered stable enough for regular production.
 
