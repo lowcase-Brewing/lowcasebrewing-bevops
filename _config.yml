@@ -4,3 +4,7 @@ url: https://bevops.lowcasebrewing.com
 
 markdown: kramdown
 theme: minima
+
+# Local working copies are not part of the published handbook.
+exclude:
+  - "README copy.md"
