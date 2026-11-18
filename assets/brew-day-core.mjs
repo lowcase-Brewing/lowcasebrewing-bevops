@@ -1,5 +1,5 @@
 export const APP = 'bevops-brew-day';
-export const VERSION = 3;
+export const VERSION = 4;
 export const TEMPLATE = 'generic-brew-day-v1';
 // Keep the existing storage key so earlier drafts can be restored and migrated.
 export const STORAGE_KEY = 'bevops.brew-day.v1';
@@ -7,13 +7,23 @@ export const MAX_FILE_BYTES = 1024 * 1024;
 export const UNITS_NOTE = 'Measurement fields use US gallons (US gal), degrees Fahrenheit (°F), specific gravity (SG), and minutes. Include units with ingredient amounts. Dates and times are local, with no timezone conversion.';
 
 const field = (id, label, value = '', type = 'text', extra = {}) => ({id, label, value, type, ...extra});
+export const BREW_METHODS = [
+  {value:'all-grain',label:'All-grain (multi-vessel)'},
+  {value:'biab',label:'Brew in a bag (BIAB)'},
+  {value:'all-in-one',label:'All-grain (all-in-one)'},
+  {value:'partial-mash',label:'Partial mash'},
+  {value:'extract-steeping',label:'Extract + steeping grains'},
+  {value:'extract',label:'Extract only'},
+  {value:'no-boil',label:'No-boil / prepared wort'},
+  {value:'other',label:'Other / hybrid'}
+];
 export const BATCH_FIELDS = [
   field('recipe', 'Beer / recipe'),
   field('recipeVersion', 'Recipe version'),
   field('batchId', 'Batch ID'),
   field('brewDate', 'Brew date', '', 'date'),
   field('brewer', 'Brewer'),
-  field('equipment', 'Equipment')
+  field('brewMethod', 'Brew Method', '', 'select', {since:4,options:BREW_METHODS})
 ];
 
 // Optional recording checkpoints: targets and actuals are supplied by the brewer.
@@ -87,6 +97,8 @@ export const WRAP_FIELDS = [
 
 export const FIELD_DEFS = [
   ...BATCH_FIELDS,
+  // Retain historical equipment entries without treating them as brew methods.
+  field('equipment', 'Equipment'),
   ...STAGES.flatMap(stage => [
     field(stage.id+'StartDate', stage.title+' start date', '', 'date', {since:3}),
     field(stage.id+'Start', stage.title+' start time', '', 'time'),
@@ -147,7 +159,7 @@ const LEGACY_STEP_LABELS = {
 
 export function validateBatch(raw) {
   const legacy=isRecord(raw) && raw.version===1 && raw.templateId==='punkin-monkey-v1';
-  if (!isRecord(raw) || raw.app!==APP || (!legacy && (![2,VERSION].includes(raw.version) || raw.templateId!==TEMPLATE))) {
+  if (!isRecord(raw) || raw.app!==APP || (!legacy && (![2,3,VERSION].includes(raw.version) || raw.templateId!==TEMPLATE))) {
     throw new Error('Choose a BevOps brew-day batch file exported by this version of the prototype.');
   }
   if (!validTimestamp(raw.createdAt) || !validTimestamp(raw.updatedAt) || !isRecord(raw.fields) || !isRecord(raw.checks)) {
@@ -169,6 +181,7 @@ export function validateBatch(raw) {
     if (value && f.type==='date' && !validDay(value)) throw new Error('A brew date is invalid. Your current draft is unchanged.');
     if (value && f.type==='time' && !/^([01]\d|2[0-3]):[0-5]\d$/.test(value)) throw new Error('A stage time is invalid. Your current draft is unchanged.');
     if (value && f.type==='datetime-local' && (!/^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d$/.test(value) || !validDay(value.slice(0,10)))) throw new Error('The pitch date or time is invalid. Your current draft is unchanged.');
+    if (f.type==='select' && value && !f.options.some(option=>option.value===value)) throw new Error('The batch file has an unrecognized brew method. Your current draft is unchanged.');
     fields[f.id]=value;
   }
   const checks={};

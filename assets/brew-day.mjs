@@ -34,12 +34,20 @@ function fieldControl(def) {
   const label=el('label',undefined,'brew-field'+(def.type==='textarea'?' full-width':''));
   label.htmlFor='field-'+def.id;
   label.append(el('span',def.label));
-  const input=el(def.type==='textarea'?'textarea':'input');
+  const input=el(def.type==='textarea'?'textarea':def.type==='select'?'select':'input');
   input.id='field-'+def.id;
   input.name=def.id;
-  if(def.type!=='textarea') input.type=def.type;
-  else input.rows=3;
-  input.maxLength=def.type==='textarea'?10000:300;
+  if(def.type==='select') {
+    input.setAttribute('aria-label',def.label);
+    const blank=el('option','Choose a brew method…');blank.value='';input.append(blank);
+    for(const option of def.options) {
+      const item=el('option',option.label);item.value=option.value;input.append(item);
+    }
+  } else {
+    if(def.type==='textarea') input.rows=3;
+    else input.type=def.type;
+    input.maxLength=def.type==='textarea'?10000:300;
+  }
   if(def.placeholder) input.placeholder=def.placeholder;
   input.value=batch.fields[def.id];
   label.append(input);
@@ -49,6 +57,7 @@ function addFields(container,defs) { for(const def of defs) container.append(fie
 function renderForm() {
   $('batch-details').replaceChildren();
   addFields($('batch-details'),BATCH_FIELDS);
+  if(batch.fields.equipment) $('batch-details').append(el('p','Previously recorded equipment: '+batch.fields.equipment,'brew-legacy-equipment'));
   $('brew-stages').replaceChildren();
   $('stage-nav').querySelectorAll('a').forEach(a=>a.remove());
   for (const [index,stage] of STAGES.entries()) {
@@ -140,7 +149,12 @@ function printRecord() {
   const root=$('print-record');root.replaceChildren();
   root.append(el('p','lowcase Brewing / BevOps','print-eyebrow'),el('h1','Brew-day record'),el('p','Brew-day checklist · use what helps.'),el('p',UNITS_NOTE),el('p','[x] Checked · [ ] Not recorded · [N/A] Not applicable'));
   const details=el('dl',undefined,'print-details');
-  for(const f of BATCH_FIELDS) {details.append(el('dt',f.label),el('dd',batch.fields[f.id]||'Not recorded'));}
+  for(const f of BATCH_FIELDS) {
+    const value=batch.fields[f.id];
+    const text=f.type==='select'?f.options.find(option=>option.value===value)?.label:value;
+    details.append(el('dt',f.label),el('dd',text||'Not recorded'));
+  }
+  if(batch.fields.equipment) details.append(el('dt','Previously recorded equipment'),el('dd',batch.fields.equipment));
   root.append(details);
   for(const stage of STAGES) {
     const section=el('section',undefined,'print-stage');section.append(el('h2',stage.title));

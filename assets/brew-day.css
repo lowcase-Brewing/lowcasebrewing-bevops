@@ -14,7 +14,7 @@
 .brew-button.primary { background:#536317; color:white; border-color:#536317; }
 .brew-button.primary:hover { background:#40500f; }
 .brew-button.quiet { background:transparent; }
-.brew-button:focus-visible, .brew-day-app input:focus-visible, .brew-day-app textarea:focus-visible { outline:3px solid #b26a10; outline-offset:3px; }
+.brew-button:focus-visible, .brew-day-app input:focus-visible, .brew-day-app textarea:focus-visible, .brew-day-app select:focus-visible { outline:3px solid #b26a10; outline-offset:3px; }
 .brew-day-storage-note { font-size:12px; color:var(--brew-muted); max-width:820px; }
 .brew-day-message { background:#fff1d6; border-left:4px solid #a86411; padding:14px 18px; font-size:14px; margin:16px 0; }
 .brew-day-file-status { font-size:14px; color:var(--brew-olive); min-height:1.5em; margin:0 0 18px; overflow-wrap:anywhere; }
@@ -25,7 +25,7 @@
 .brew-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
 .brew-field { display:flex; flex-direction:column; gap:8px; font-size:13px; font-weight:600; min-width:0; margin:0; }
 .brew-field.full-width { grid-column:1/-1; }
-.brew-day-app input:not([type=checkbox]), .brew-day-app textarea { box-sizing:border-box; width:100%; min-width:0; border:1px solid #b8c1b4; border-radius:3px; padding:11px 12px; background:white; color:#142b3a; font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+.brew-day-app input:not([type=checkbox]), .brew-day-app textarea, .brew-day-app select { box-sizing:border-box; width:100%; min-width:0; border:1px solid #b8c1b4; border-radius:3px; padding:11px 12px; background:white; color:#142b3a; font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
 .brew-day-app textarea { min-height:104px; resize:vertical; }
 .brew-day-app input::placeholder, .brew-day-app textarea::placeholder { color:#67756c; opacity:1; }
 .brew-workspace { display:grid; grid-template-columns:160px minmax(0,1fr); gap:28px; align-items:start; }
@@ -122,3 +122,8 @@
 .brew-check-row.is-na .brew-check { color:#50616a; font-style:italic; }
 .brew-stage-nav .brew-na-help { font-size:14px; }
 @media (max-width:480px) { .brew-times { grid-template-columns:1fr; } }
+
+.brew-day-app select { appearance:none; padding-right:38px; }
+.brew-field:has(select) { position:relative; }
+.brew-field:has(select)::after { content:''; position:absolute; right:16px; bottom:21px; width:7px; height:7px; border-right:2px solid #50616a; border-bottom:2px solid #50616a; transform:rotate(45deg); pointer-events:none; }
+.brew-legacy-equipment { grid-column:1/-1; margin:0; font-size:14px; color:var(--brew-muted); overflow-wrap:anywhere; }

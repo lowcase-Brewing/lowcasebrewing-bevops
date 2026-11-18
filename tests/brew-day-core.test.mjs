@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {createBatch,parseBatch,serializeBatch,validateBatch,saveDraft,batchFilename,checklistProgress,formatStageStamp,STORAGE_KEY,MAX_FILE_BYTES} from '../assets/brew-day-core.mjs';
+import {BREW_METHODS,createBatch,parseBatch,serializeBatch,validateBatch,saveDraft,batchFilename,checklistProgress,formatStageStamp,STORAGE_KEY,MAX_FILE_BYTES} from '../assets/brew-day-core.mjs';
 
 test('a fresh batch has no prescribed details, targets, ingredients, actuals, or completed steps',()=>{
   const batch=createBatch(new Date(2026,10,18,12));
@@ -78,7 +78,7 @@ test('export filenames stay useful and cannot contain path separators',()=>{
 test('earlier batch files retain their values and original checklist wording during migration',()=>{
   const legacy=JSON.parse(readFileSync(new URL('./fixtures/punkin-monkey-v1.json',import.meta.url),'utf8'));
   const migrated=parseBatch(JSON.stringify(legacy));
-  assert.equal(migrated.version,3);
+  assert.equal(migrated.version,4);
   assert.equal(migrated.templateId,'generic-brew-day-v1');
   for(const [id,value] of Object.entries(legacy.fields)) assert.equal(migrated.fields[id],value,id);
   assert.deepEqual(migrated.checks,legacy.checks);
@@ -137,4 +137,29 @@ test('missing N/A data, invalid N/A values, and invalid stage dates are rejected
   const bad=createBatch();bad.notApplicable['prep-water']='yes';
   const date=createBatch();date.fields.mashStartDate='2026-02-31';
   for(const batch of [missing,bad,date]) assert.throws(()=>validateBatch(batch));
+});
+
+
+test('every brew method round-trips without changing checklist applicability',()=>{
+  for(const method of BREW_METHODS) {
+    const batch=createBatch();batch.fields.brewMethod=method.value;
+    batch.notApplicable['prep-sparge']=true;
+    const restored=parseBatch(serializeBatch(batch));
+    assert.equal(restored.fields.brewMethod,method.value);
+    assert.deepEqual(restored.checks,batch.checks);
+    assert.deepEqual(restored.notApplicable,batch.notApplicable);
+  }
+  const invalid=createBatch();invalid.fields.brewMethod='All Grian';
+  assert.throws(()=>validateBatch(invalid),/unrecognized brew method/);
+});
+
+test('earlier equipment text is preserved without guessing a brew method',()=>{
+  const old=JSON.parse(readFileSync(new URL('./fixtures/generic-v3.json',import.meta.url),'utf8'));
+  const restored=validateBatch(old);
+  for(const [id,value] of Object.entries(old.fields)) assert.equal(restored.fields[id],value,id);
+  assert.equal(restored.fields.brewMethod,'');
+  assert.equal(restored.fields.equipment,'BrewZilla');
+  assert.deepEqual(restored.notApplicable,old.notApplicable);
+  restored.fields.brewMethod='all-in-one';
+  assert.equal(parseBatch(serializeBatch(restored)).fields.equipment,'BrewZilla');
 });
