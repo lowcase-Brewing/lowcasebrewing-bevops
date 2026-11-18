@@ -1,9 +1,10 @@
 export const APP = 'bevops-brew-day';
-export const VERSION = 2;
+export const VERSION = 3;
 export const TEMPLATE = 'generic-brew-day-v1';
 // Keep the existing storage key so earlier drafts can be restored and migrated.
 export const STORAGE_KEY = 'bevops.brew-day.v1';
 export const MAX_FILE_BYTES = 1024 * 1024;
+export const UNITS_NOTE = 'Measurement fields use US gallons (US gal), degrees Fahrenheit (°F), specific gravity (SG), and minutes. Include units with ingredient amounts. Dates and times are local, with no timezone conversion.';
 
 const field = (id, label, value = '', type = 'text', extra = {}) => ({id, label, value, type, ...extra});
 export const BATCH_FIELDS = [
@@ -24,9 +25,9 @@ export const STAGES = [
       ['water', 'Prepare brewing water and any treatment appropriate to your source water.'],
       ['sparge', 'Prepare additional water for sparging or volume adjustments, if needed.']
     ],
-    measures:[['strike', 'Initial brewing water', '', 'gal'], ['spargeTemp', 'Sparge-water temperature', '', '°F']],
+    measures:[['strike', 'Initial brewing water', '', 'US gal'], ['spargeTemp', 'Sparge-water temperature', '', '°F']],
     fields:[
-      field('grainBill', 'Grain bill / fermentables', '', 'textarea', {placeholder:'Ingredient · amount. Include grains, malt extracts, sugars, or other fermentables used in this batch.'}),
+      field('grainBill', 'Grain bill / fermentables', '', 'textarea', {since:2, placeholder:'Ingredient · amount. Include grains, malt extracts, sugars, or other fermentables used in this batch.'}),
       field('ingredientsNotes', 'Water treatments & ingredient substitutions', '', 'textarea', {placeholder:'Record water additions and treatments, substitutions, and anything you prepared differently.'})
     ]
   },
@@ -48,7 +49,7 @@ export const STAGES = [
       ['sample', 'Mix the wort thoroughly and take a representative gravity sample.'],
       ['record', 'Record pre-boil volume and gravity; note sample temperature or correction.']
     ],
-    measures:[['preVolume','Pre-boil volume','','gal'], ['preGravity','Pre-boil gravity','','SG']],
+    measures:[['preVolume','Pre-boil volume','','US gal'], ['preGravity','Pre-boil gravity','','SG']],
     fields:[field('gravityMethod','Gravity instrument / sample correction', '', 'text', {placeholder:'e.g. hydrometer; sample cooled to calibration temperature'})]
   },
   {id:'boil', title:'Boil & flameout', short:'Boil', intro:'Record your own hop and other-additions schedule below, including amounts and timing. Skip additions or holds that are not part of this batch.',
@@ -60,20 +61,20 @@ export const STAGES = [
       ['flameout', 'Turn off the heat and make any planned flameout additions.'],
       ['steep', 'Complete any planned steep or whirlpool hold before chilling.']
     ],
-    measures:[['boilMinutes','Boil duration','','min'], ['steepMinutes','Flameout / whirlpool hold','','min']],
+    measures:[['boilMinutes','Boil duration','','min'], ['steepMinutes','Flameout / whirlpool hold','','min'], ['whirlpoolTemp','Whirlpool / hop-stand temperature','','°F',3]],
     fields:[field('hopAlpha','Hop varieties / actual alpha acids (%)'), field('additionNotes','Hop schedule & other additions', '', 'textarea', {placeholder:'Ingredient · amount · timing (say whether minutes remaining or elapsed). Record actual additions and any changes, too.'})]
   },
-  {id:'transfer', title:'Chill, transfer & pitch', short:'Transfer', intro:'Use the pitching and fermentation conditions appropriate to your recipe and chosen yeast.',
+  {id:'transfer', title:'Chill, transfer & pitch', short:'Transfer', intro:'Use the conditions appropriate to your recipe and chosen yeast. If topping up, record the water added, mix the wort thoroughly, and record final volume and OG after the addition.',
     steps:[
       ['sanitize', 'Confirm the fermenter, transfer tubing, and sampling equipment are sanitized.'],
       ['chill', 'Chill the wort to the planned pitch temperature.'],
       ['transfer', 'Transfer to the fermenter and record the volume.'],
-      ['og', 'Measure and record original gravity, with sample correction if needed.'],
+      ['og', 'After any top-up, confirm the wort is thoroughly mixed and record final volume and original gravity.'],
       ['pitch', 'Confirm pitch temperature and add yeast according to the chosen yeast instructions.'],
       ['control', 'Seal the fermenter and set up the planned fermentation conditions.'],
       ['cleanup', 'Clean equipment and record anything worth changing next time.']
     ],
-    measures:[['fermenterVolume','Volume into fermenter','','gal'], ['og','Original gravity','','SG'], ['pitchTemp','Pitch temperature','','°F'], ['chamberTemp','Fermentation temperature setting','','°F']],
+    measures:[['topUpVolume','Top-up water (if used)','','US gal',3], ['fermenterVolume','Volume into fermenter','','US gal'], ['og','Original gravity','','SG'], ['pitchTemp','Pitch temperature','','°F'], ['chamberTemp','Fermentation temperature setting','','°F']],
     fields:[field('yeast','Yeast / amount'), field('pitchTime','Pitch date & time','','datetime-local')]
   }
 ];
@@ -87,11 +88,13 @@ export const WRAP_FIELDS = [
 export const FIELD_DEFS = [
   ...BATCH_FIELDS,
   ...STAGES.flatMap(stage => [
-    field(stage.id+'Start', stage.title+' start', '', 'time'),
-    field(stage.id+'Finish', stage.title+' finish', '', 'time'),
-    ...stage.measures.flatMap(([id,label,target,unit])=>[
-      field(id+'Target',label+' target',target,'text',{unit}),
-      field(id+'Actual',label+' actual','','text',{unit})
+    field(stage.id+'StartDate', stage.title+' start date', '', 'date', {since:3}),
+    field(stage.id+'Start', stage.title+' start time', '', 'time'),
+    field(stage.id+'FinishDate', stage.title+' finish date', '', 'date', {since:3}),
+    field(stage.id+'Finish', stage.title+' finish time', '', 'time'),
+    ...stage.measures.flatMap(([id,label,target,unit,since=1])=>[
+      field(id+'Target',label+' target',target,'text',{unit,since}),
+      field(id+'Actual',label+' actual','','text',{unit,since})
     ]),
     ...stage.fields,
     field(stage.id+'Notes',stage.title+' notes','','textarea')
@@ -108,6 +111,7 @@ export function createBatch(now = new Date()) {
   return {app:APP,version:VERSION,templateId:TEMPLATE,createdAt:stamp,updatedAt:stamp,
     fields:Object.fromEntries(FIELD_DEFS.map(f=>[f.id,f.value])),
     checks:Object.fromEntries(CHECK_IDS.map(id=>[id,false])),
+    notApplicable:Object.fromEntries(CHECK_IDS.map(id=>[id,false])),
     stepLabels:Object.fromEntries(STAGES.flatMap(s=>s.steps.map(([id,text])=>[s.id+'-'+id,text])))};
 }
 
@@ -143,20 +147,20 @@ const LEGACY_STEP_LABELS = {
 
 export function validateBatch(raw) {
   const legacy=isRecord(raw) && raw.version===1 && raw.templateId==='punkin-monkey-v1';
-  if (!isRecord(raw) || raw.app!==APP || (!legacy && (raw.version!==VERSION || raw.templateId!==TEMPLATE))) {
+  if (!isRecord(raw) || raw.app!==APP || (!legacy && (![2,VERSION].includes(raw.version) || raw.templateId!==TEMPLATE))) {
     throw new Error('Choose a BevOps brew-day batch file exported by this version of the prototype.');
   }
   if (!validTimestamp(raw.createdAt) || !validTimestamp(raw.updatedAt) || !isRecord(raw.fields) || !isRecord(raw.checks)) {
     throw new Error('The batch file is incomplete or has invalid dates. Your current draft is unchanged.');
   }
-  const fieldKeys=FIELD_DEFS.filter(f=>!legacy || f.id!=='grainBill').map(f=>f.id);
+  const fieldKeys=FIELD_DEFS.filter(f=>(f.since||1)<=raw.version).map(f=>f.id);
   const exactKeys=(obj,keys)=>Object.keys(obj).length===keys.length && keys.every(key=>Object.hasOwn(obj,key));
   if (!exactKeys(raw.fields,fieldKeys) || !exactKeys(raw.checks,CHECK_IDS)) {
     throw new Error('The batch file has missing or unrecognized fields. Your current draft is unchanged.');
   }
   const fields={};
   for (const f of FIELD_DEFS) {
-    const value=legacy && f.id==='grainBill'?'':raw.fields[f.id];
+    const value=(f.since||1)>raw.version?f.value:raw.fields[f.id];
     if (typeof value!=='string' || value.length>(f.type==='textarea'?10000:300)) {
       throw new Error('The batch file has an invalid or oversized field. Your current draft is unchanged.');
     }
@@ -172,6 +176,13 @@ export function validateBatch(raw) {
     if (typeof raw.checks[id]!=='boolean') throw new Error('A checklist entry is invalid. Your current draft is unchanged.');
     checks[id]=raw.checks[id];
   }
+  const rawNA=raw.version<3?Object.fromEntries(CHECK_IDS.map(id=>[id,false])):raw.notApplicable;
+  if (!isRecord(rawNA) || !exactKeys(rawNA,CHECK_IDS)) throw new Error('The batch file has invalid N/A entries. Your current draft is unchanged.');
+  const notApplicable={};
+  for(const id of CHECK_IDS) {
+    if(typeof rawNA[id]!=='boolean' || (rawNA[id] && checks[id])) throw new Error('A step cannot be both checked and not applicable. Your current draft is unchanged.');
+    notApplicable[id]=rawNA[id];
+  }
   const labels=legacy?LEGACY_STEP_LABELS:raw.stepLabels;
   if (!isRecord(labels) || !exactKeys(labels,CHECK_IDS)) throw new Error('The batch file has an invalid checklist. Your current draft is unchanged.');
   const stepLabels={};
@@ -179,7 +190,7 @@ export function validateBatch(raw) {
     if (typeof labels[id]!=='string' || !labels[id].trim() || labels[id].length>500) throw new Error('The batch file has an invalid checklist label. Your current draft is unchanged.');
     stepLabels[id]=labels[id];
   }
-  return {app:APP,version:VERSION,templateId:TEMPLATE,createdAt:raw.createdAt,updatedAt:raw.updatedAt,fields,checks,stepLabels};
+  return {app:APP,version:VERSION,templateId:TEMPLATE,createdAt:raw.createdAt,updatedAt:raw.updatedAt,fields,checks,notApplicable,stepLabels};
 }
 
 export function parseBatch(text) {
@@ -198,4 +209,19 @@ export function batchFilename(batch) {
 // relying on a browser's privacy settings.
 export function saveDraft(storage, batch) {
   try { storage.setItem(STORAGE_KEY,serializeBatch(batch)); return true; } catch { return false; }
+}
+
+
+export function checklistProgress(batch) {
+  const notApplicable=CHECK_IDS.filter(id=>batch.notApplicable[id]).length;
+  return {checked:CHECK_IDS.filter(id=>batch.checks[id]).length,applicable:CHECK_IDS.length-notApplicable,notApplicable};
+}
+
+export function formatStageStamp(batch,stageId,kind) {
+  const date=batch.fields[stageId+kind+'Date'];
+  const time=batch.fields[stageId+kind];
+  if(date && time) return date+' '+time;
+  if(date) return date+' (time not recorded)';
+  if(time) return time+' (date not recorded)';
+  return 'Not recorded';
 }

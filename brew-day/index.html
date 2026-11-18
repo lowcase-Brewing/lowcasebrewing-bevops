@@ -10,6 +10,8 @@ description: A local prototype for recording a batch, keeping a checklist, and s
     <h1>Brew-day notebook</h1>
     <p class="brew-day-lead">A place for your numbers, your notes, and whatever actually happens.</p>
     <p class="brew-day-context">Start with your own recipe, ingredients, and targets. Skip steps that do not apply, record what actually happens, and use as much or as little of the checklist as helps.</p>
+    <p id="units-note" class="brew-day-units">Measurement fields use US gallons (US gal), °F, SG, and minutes. Include units with ingredient amounts. Dates and times are local.</p>
+    <details class="brew-day-limitations"><summary>Current scope</summary><p>This notebook records one wort and one fermenter. Kettle-souring workflows and split batches are not explicitly modeled; use a process-specific runbook for those.</p></details>
   </header>
 
   <noscript><p>This notebook needs JavaScript to save drafts, import batch files, and prepare a printout. Enable JavaScript and reload to use it.</p></noscript>
@@ -37,6 +39,7 @@ description: A local prototype for recording a batch, keeping a checklist, and s
         <nav id="stage-nav" class="brew-stage-nav" aria-label="Brew-day stages">
           <p class="eyebrow">On the bench</p>
           <p id="checklist-progress">Choose the steps that help.</p>
+          <p class="brew-na-help">N/A means not applicable. Unchecked means not recorded.</p>
         </nav>
         <div id="brew-stages"></div>
       </div>

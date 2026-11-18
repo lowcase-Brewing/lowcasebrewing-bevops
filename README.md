@@ -52,9 +52,21 @@ Setup includes a grain bill/fermentables field and separate notes for water trea
 
 One active draft is saved under `bevops.brew-day.v1` in localStorage. Storage is scoped to browser, device, and origin (including the local preview port). There is no server submission, user account, analytics, or cloud sync. Once loaded, the notebook can keep working without connectivity; reopening/reloading still requires access to the site. No service worker is installed.
 
-Export creates a version-2 `.bevops.json` batch file. Existing version-1 Punkin’ Monkey drafts and exports are migrated when opened, preserving all recorded values, checks, notes, and the original checklist wording; the new grain-bill field starts blank. Version-2 files snapshot checklist labels so historical records retain their meaning when wording evolves. The storage key is deliberately retained for migration. To start blank instead of restoring an existing record, choose **New batch** after exporting anything you want to keep. Import validates its version, template, field names/types, size, and date/time fields before asking to replace the draft. New batch also asks before replacing the draft. Invalid stored data is retained for a recovery download; blocked or full storage produces an explicit unsaved status. A change from another tab pauses autosave so stale tabs cannot silently overwrite newer work. Export before switching batches, clearing browser data, or closing a private window.
+Export creates a version-3 `.bevops.json` batch file. Existing version-1 Punkin’ Monkey and version-2 generic drafts/exports are migrated when opened, preserving recorded values, checks, notes, and original checklist wording. Newly introduced fields start blank and no dates or N/A decisions are inferred. Version-2 and later files snapshot checklist labels so historical records retain their meaning when wording evolves. The storage key is deliberately retained for migration. To start blank instead of restoring an existing record, choose **New batch** after exporting anything you want to keep. Import validates its version, template, field names/types, size, and date/time fields before asking to replace the draft. New batch also asks before replacing the draft. Invalid stored data is retained for a recovery download; blocked or full storage produces an explicit unsaved status. A change from another tab pauses autosave so stale tabs cannot silently overwrite newer work. Export before switching batches, clearing browser data, or closing a private window.
 
 Use **Print / PDF**, then the browser's print dialog to print or save as PDF. The print stylesheet includes checked and unchecked steps, targets, actuals, metadata, and full notes rather than clipped input controls. Export JSON as well if you want to edit the record later.
+
+
+### Small workflow accommodations
+
+- Each step has an explicit N/A toggle. N/A steps cannot also be checked, are excluded from the applicable-step count, and print as `[N/A]`. Clearing N/A makes the unchecked step available again. Steps stay visible; equipment remains a free-text field rather than selecting a brewing-method preset.
+- Optional top-up-water target/actual volumes appear before final fermenter volume and OG. Record final volume/OG after any top-up and mixing. The boil section also includes a whirlpool/hop-stand temperature target/actual pair.
+- Each stage has separate start/finish dates and times for overnight or multi-day brewing. Dates are optional and blank by default. Historical time-only values are retained; printouts explicitly say when a date or time was not recorded.
+- Measurement fields are explicitly US gallons, °F, SG, and minutes. No unit conversions are performed. Include units with ingredient amounts. Dates/times are local and not converted between timezones. The same unit statement appears in printouts.
+
+### Current limitations
+
+This remains a brew-day record for one wort and one fermenter. Kettle souring (including souring holds, culture/pH records, and repeated boil/chill phases) and split batches require process-specific records. Additional mash rests can be recorded in notes. Dry hopping, fermentation additions, and conditioning are handed off in notes rather than tracked as a fermentation schedule. Test the prototype on a real brew day before adding method-driven checklists.
 
 ### Prototype checks
 

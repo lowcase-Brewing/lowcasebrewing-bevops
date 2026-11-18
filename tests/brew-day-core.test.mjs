@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {createBatch,parseBatch,serializeBatch,validateBatch,saveDraft,batchFilename,STORAGE_KEY,MAX_FILE_BYTES} from '../assets/brew-day-core.mjs';
+import {createBatch,parseBatch,serializeBatch,validateBatch,saveDraft,batchFilename,checklistProgress,formatStageStamp,STORAGE_KEY,MAX_FILE_BYTES} from '../assets/brew-day-core.mjs';
 
 test('a fresh batch has no prescribed details, targets, ingredients, actuals, or completed steps',()=>{
   const batch=createBatch(new Date(2026,10,18,12));
@@ -78,7 +78,7 @@ test('export filenames stay useful and cannot contain path separators',()=>{
 test('earlier batch files retain their values and original checklist wording during migration',()=>{
   const legacy=JSON.parse(readFileSync(new URL('./fixtures/punkin-monkey-v1.json',import.meta.url),'utf8'));
   const migrated=parseBatch(JSON.stringify(legacy));
-  assert.equal(migrated.version,2);
+  assert.equal(migrated.version,3);
   assert.equal(migrated.templateId,'generic-brew-day-v1');
   for(const [id,value] of Object.entries(legacy.fields)) assert.equal(migrated.fields[id],value,id);
   assert.deepEqual(migrated.checks,legacy.checks);
@@ -95,4 +95,46 @@ test('invalid historical files and damaged label snapshots are rejected',()=>{
   const batch=createBatch();
   delete batch.stepLabels['prep-water'];
   assert.throws(()=>validateBatch(batch));
+});
+
+
+test('N/A steps round-trip independently from checked and unrecorded steps',()=>{
+  const batch=createBatch();
+  batch.notApplicable['prep-sparge']=true;
+  batch.checks['mash-rest1']=true;
+  assert.deepEqual(checklistProgress(batch),{checked:1,applicable:25,notApplicable:1});
+  assert.deepEqual(parseBatch(serializeBatch(batch)),batch);
+  batch.checks['prep-sparge']=true;
+  assert.throws(()=>validateBatch(batch),/both checked and not applicable/);
+});
+
+test('overnight stages and added measurements survive export and import',()=>{
+  const batch=createBatch();
+  batch.fields.mashStartDate='2026-11-18';batch.fields.mashStart='23:45';
+  batch.fields.mashFinishDate='2026-11-19';batch.fields.mashFinish='00:30';
+  batch.fields.topUpVolumeActual='1.5';batch.fields.whirlpoolTempActual='170';
+  const restored=parseBatch(serializeBatch(batch));
+  assert.deepEqual(restored,batch);
+  assert.equal(formatStageStamp(restored,'mash','Start'),'2026-11-18 23:45');
+  assert.equal(formatStageStamp(restored,'mash','Finish'),'2026-11-19 00:30');
+});
+
+test('version-2 records retain time-only entries without inventing dates or N/A states',()=>{
+  const old=JSON.parse(readFileSync(new URL('./fixtures/generic-v2.json',import.meta.url),'utf8'));
+  const restored=validateBatch(old);
+  for(const [id,value] of Object.entries(old.fields)) assert.equal(restored.fields[id],value,id);
+  assert.deepEqual(restored.checks,old.checks);
+  assert.deepEqual(restored.stepLabels,old.stepLabels);
+  assert.equal(restored.fields.mashStartDate,'');
+  assert.equal(restored.fields.whirlpoolTempActual,'');
+  assert.ok(Object.values(restored.notApplicable).every(value=>value===false));
+  assert.equal(formatStageStamp(restored,'mash','Start'),'23:45 (date not recorded)');
+  assert.deepEqual(validateBatch(JSON.parse(serializeBatch(restored))),restored);
+});
+
+test('missing N/A data, invalid N/A values, and invalid stage dates are rejected',()=>{
+  const missing=createBatch();delete missing.notApplicable;
+  const bad=createBatch();bad.notApplicable['prep-water']='yes';
+  const date=createBatch();date.fields.mashStartDate='2026-02-31';
+  for(const batch of [missing,bad,date]) assert.throws(()=>validateBatch(batch));
 });

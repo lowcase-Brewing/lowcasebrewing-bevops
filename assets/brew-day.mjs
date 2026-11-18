@@ -1,4 +1,4 @@
-import {BATCH_FIELDS,STAGES,WRAP_FIELDS,CHECK_IDS,STORAGE_KEY,MAX_FILE_BYTES,createBatch,parseBatch,serializeBatch,batchFilename,saveDraft} from './brew-day-core.mjs';
+import {BATCH_FIELDS,STAGES,WRAP_FIELDS,UNITS_NOTE,checklistProgress,formatStageStamp,STORAGE_KEY,MAX_FILE_BYTES,createBatch,parseBatch,serializeBatch,batchFilename,saveDraft} from './brew-day-core.mjs';
 
 const $=id=>document.getElementById(id);
 const el=(tag,text,className)=>{
@@ -12,6 +12,7 @@ let paused=false;
 let recoveryText=null;
 let storage=null;
 let pending=null;
+$('units-note').textContent=UNITS_NOTE;
 
 function message(text) {
   $('notebook-message').textContent=text;
@@ -63,14 +64,21 @@ function renderForm() {
     const title=el('h2',stage.title); title.id=stage.id+'-title';
     heading.append(number,title); section.append(heading,el('p',stage.intro,'brew-stage-intro'));
     const times=el('div',undefined,'brew-times');
-    addFields(times,[{id:stage.id+'Start',label:'Started',type:'time'},{id:stage.id+'Finish',label:'Finished',type:'time'}]);
+    addFields(times,[{id:stage.id+'StartDate',label:'Start date',type:'date'},{id:stage.id+'Start',label:'Start time',type:'time'},{id:stage.id+'FinishDate',label:'Finish date',type:'date'},{id:stage.id+'Finish',label:'Finish time',type:'time'}]);
     section.append(times);
     const checks=el('div',undefined,'brew-checks');
     for (const [id,text] of stage.steps) {
       const key=stage.id+'-'+id;
+      const row=el('div',undefined,'brew-check-row'); row.dataset.step=key;
       const label=el('label',undefined,'brew-check');
       const input=el('input'); input.type='checkbox'; input.name=key; input.checked=batch.checks[key]; input.dataset.check=key;
-      label.append(input,el('span',batch.stepLabels[key])); checks.append(label);
+      label.append(input,el('span',batch.stepLabels[key]));
+      const na=el('button','N/A','brew-na');na.type='button';na.dataset.na=key;
+      na.setAttribute('aria-label','N/A — '+batch.stepLabels[key]);na.title='Not applicable';
+      row.append(label,na);checks.append(row);
+      row.classList.toggle('is-na',batch.notApplicable[key]);
+      input.disabled=batch.notApplicable[key];
+      na.setAttribute('aria-pressed',String(batch.notApplicable[key]));
     }
     section.append(checks);
     const table=el('table',undefined,'brew-measurements');
@@ -100,8 +108,8 @@ function renderForm() {
   updateProgress();
 }
 function updateProgress() {
-  const checked=Object.values(batch.checks).filter(Boolean).length;
-  $('checklist-progress').textContent=checked+' of '+CHECK_IDS.length+' checked. Use what helps.';
+  const progress=checklistProgress(batch);
+  $('checklist-progress').textContent=progress.checked+' of '+progress.applicable+' applicable steps checked · '+progress.notApplicable+' N/A. Use what helps.';
 }
 function download(text,filename) {
   const blob=new Blob([text],{type:'application/json'});
@@ -130,15 +138,15 @@ function askReplace(action) {
 }
 function printRecord() {
   const root=$('print-record');root.replaceChildren();
-  root.append(el('p','lowcase Brewing / BevOps','print-eyebrow'),el('h1','Brew-day record'),el('p','Brew-day checklist · use what helps.'));
+  root.append(el('p','lowcase Brewing / BevOps','print-eyebrow'),el('h1','Brew-day record'),el('p','Brew-day checklist · use what helps.'),el('p',UNITS_NOTE),el('p','[x] Checked · [ ] Not recorded · [N/A] Not applicable'));
   const details=el('dl',undefined,'print-details');
   for(const f of BATCH_FIELDS) {details.append(el('dt',f.label),el('dd',batch.fields[f.id]||'Not recorded'));}
   root.append(details);
   for(const stage of STAGES) {
     const section=el('section',undefined,'print-stage');section.append(el('h2',stage.title));
-    section.append(el('p','Started: '+(batch.fields[stage.id+'Start']||'Not recorded')+' / Finished: '+(batch.fields[stage.id+'Finish']||'Not recorded')));
+    section.append(el('p','Started: '+formatStageStamp(batch,stage.id,'Start')+' / Finished: '+formatStageStamp(batch,stage.id,'Finish')));
     const steps=el('ul');
-    for(const [id,text] of stage.steps) steps.append(el('li',(batch.checks[stage.id+'-'+id]?'[x] ':'[ ] ')+batch.stepLabels[stage.id+'-'+id]));
+    for(const [id,text] of stage.steps) steps.append(el('li',(batch.notApplicable[stage.id+'-'+id]?'[N/A] ':batch.checks[stage.id+'-'+id]?'[x] ':'[ ] ')+batch.stepLabels[stage.id+'-'+id]));
     section.append(steps);
     const table=el('table');const head=el('tr');
     for(const text of ['Measurement','Target','Actual']) head.append(el('th',text));
@@ -174,6 +182,19 @@ $('batch-form').addEventListener('input',event=>{
   if(input.dataset.check) batch.checks[input.dataset.check]=input.checked;
   else if(Object.hasOwn(batch.fields,input.name)) batch.fields[input.name]=input.value;
   else return;
+  batch.updatedAt=new Date().toISOString();updateProgress();persist();
+});
+$('batch-form').addEventListener('click',event=>{
+  const button=event.target.closest('button[data-na]');
+  if(!button) return;
+  const key=button.dataset.na;
+  batch.notApplicable[key]=!batch.notApplicable[key];
+  if(batch.notApplicable[key]) batch.checks[key]=false;
+  const row=button.closest('.brew-check-row');
+  const input=row.querySelector('input');
+  input.checked=batch.checks[key];input.disabled=batch.notApplicable[key];
+  row.classList.toggle('is-na',batch.notApplicable[key]);
+  button.setAttribute('aria-pressed',String(batch.notApplicable[key]));
   batch.updatedAt=new Date().toISOString();updateProgress();persist();
 });
 $('export-batch').addEventListener('click',exportBatch);
