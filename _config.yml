@@ -8,8 +8,10 @@ theme: minima
 
 # The homepage now lives in index.html. README files describe the repository.
 exclude:
+  - _site
   - README.md
   - "README copy.md"
   - Gemfile
   - Gemfile.lock
   - vendor
+  - tests

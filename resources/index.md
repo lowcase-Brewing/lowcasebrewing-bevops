@@ -8,6 +8,12 @@ Tools, references, and lessons for the next brew day. Some borrowed from people 
 
 This is a small, growing collection. We explain what each resource can help with and distinguish things we're exploring from our own brewing documentation.
 
+## From the BevOps workbench
+
+### [Brew-day notebook prototype]({{ '/brew-day/' | relative_url }})
+
+A checklist and batch record based on our Punkin’ Monkey runbook. Record actual measurements, keep notes, export or import a batch file, and print the record. Your draft stays in this browser; export it to keep your own copy.
+
 ## Calculators we're exploring
 
 ### [Brewer's Friend: all-grain OG, FG & ABV](https://www.brewersfriend.com/allgrain-ogfg/)
