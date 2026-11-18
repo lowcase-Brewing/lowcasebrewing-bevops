@@ -1,0 +1,65 @@
+---
+layout: default
+title: Brew-day notebook
+description: A local prototype for recording a batch, keeping a checklist, and saving a printable brew-day record.
+---
+<link rel="stylesheet" href="{{ '/assets/brew-day.css' | relative_url }}">
+<div class="brew-day-app" id="brew-day-app">
+  <header class="brew-day-heading screen-only">
+    <p class="eyebrow">BevOps workbench / local prototype</p>
+    <h1>Brew-day notebook</h1>
+    <p class="brew-day-lead">A place for your numbers, your notes, and whatever actually happens.</p>
+    <p class="brew-day-context">Start with your own recipe, ingredients, and targets. Skip steps that do not apply, record what actually happens, and use as much or as little of the checklist as helps.</p>
+    <p id="units-note" class="brew-day-units">Measurement fields use US gallons (US gal), °F, SG, and minutes. Include units with ingredient amounts. Dates and times are local.</p>
+    <details class="brew-day-limitations"><summary>Current scope</summary><p>This notebook records one wort and one fermenter. Kettle-souring workflows and split batches are not explicitly modeled; use a process-specific runbook for those.</p></details>
+  </header>
+
+  <noscript><p>This notebook needs JavaScript to save drafts, import batch files, and prepare a printout. Enable JavaScript and reload to use it.</p></noscript>
+  <div id="notebook" hidden>
+    <div class="brew-day-toolbar screen-only" aria-label="Batch file actions">
+      <div class="brew-day-save"><span class="save-dot" aria-hidden="true"></span><span id="save-status" role="status" aria-live="polite">Ready to record</span></div>
+      <div class="brew-day-actions">
+        <button type="button" id="export-batch" class="brew-button primary">Export batch</button>
+        <button type="button" id="import-batch" class="brew-button">Import batch</button>
+        <button type="button" id="print-batch" class="brew-button">Print / PDF</button>
+        <button type="button" id="new-batch" class="brew-button quiet">New batch</button>
+        <input id="import-file" type="file" accept=".json,application/json" hidden aria-label="Choose a batch JSON file">
+      </div>
+    </div>
+    <p class="brew-day-storage-note screen-only">One draft is saved in this browser on this device. <strong>Export your batch</strong> to keep a backup or move it elsewhere. Private browsing and clearing site data can remove browser drafts.</p>
+    <div id="notebook-message" class="brew-day-message screen-only" role="status" aria-live="polite" hidden></div>
+    <button type="button" id="recover-draft" class="brew-button screen-only" hidden>Download stored draft for recovery</button>
+    <p id="file-status" class="brew-day-file-status screen-only" role="status" aria-live="polite"></p>
+    <form id="batch-form" class="screen-only" autocomplete="off" novalidate>
+      <section class="brew-panel" aria-labelledby="batch-details-title">
+        <div class="brew-section-heading"><span class="brew-stage-number" aria-hidden="true">00</span><h2 id="batch-details-title">The batch</h2></div>
+        <div id="batch-details" class="brew-fields"></div>
+      </section>
+      <div class="brew-workspace">
+        <nav id="stage-nav" class="brew-stage-nav" aria-label="Brew-day stages">
+          <p class="eyebrow">On the bench</p>
+          <p id="checklist-progress">Choose the steps that help.</p>
+          <p class="brew-na-help">N/A means not applicable. Unchecked means not recorded.</p>
+        </nav>
+        <div id="brew-stages"></div>
+      </div>
+      <section class="brew-panel brew-wrap-up" aria-labelledby="wrap-up-title">
+        <div class="brew-section-heading"><span class="brew-stage-number" aria-hidden="true">06</span><h2 id="wrap-up-title">For next time</h2></div>
+        <div id="wrap-up-fields" class="brew-fields"></div>
+      </section>
+    </form>
+    <div id="print-record" class="print-only"></div>
+  </div>
+
+  <dialog id="replace-dialog" aria-labelledby="replace-title" aria-describedby="replace-description">
+    <h2 id="replace-title">Replace this draft?</h2>
+    <p id="replace-description"></p>
+    <p>Export your current batch first if you want to keep it.</p>
+    <div class="brew-dialog-actions">
+      <button type="button" id="cancel-replace" class="brew-button" autofocus>Keep editing</button>
+      <button type="button" id="export-before-replace" class="brew-button">Export current batch</button>
+      <button type="button" id="confirm-replace" class="brew-button primary">Replace draft</button>
+    </div>
+  </dialog>
+</div>
+<script type="module" src="{{ '/assets/brew-day.mjs' | relative_url }}"></script>

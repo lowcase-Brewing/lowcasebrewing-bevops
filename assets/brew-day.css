@@ -1,0 +1,129 @@
+.brew-day-app { --brew-line:#d8ded5; --brew-muted:#50616a; --brew-olive:#536317; }
+.brew-day-app [hidden] { display:none !important; }
+.brew-day-heading { max-width:780px; }
+.brew-day-heading h1 { margin-bottom:14px; }
+.brew-day-lead { font-size:23px; line-height:1.5; }
+.brew-day-context { color:var(--brew-muted); font-size:15px; }
+.brew-day-toolbar { display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:center; border-top:1px solid var(--brew-line); padding:24px 0 12px; margin-top:28px; }
+.brew-day-save { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--brew-olive); }
+.save-dot { width:8px; height:8px; border-radius:50%; background:currentColor; flex-shrink:0; }
+.brew-day-save.unsaved { color:#8c4117; }
+.brew-day-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.brew-button { appearance:none; border:1px solid #b8c1b4; padding:10px 14px; min-height:44px; border-radius:4px; background:#fff; color:#142b3a; font:600 14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; cursor:pointer; }
+.brew-button:hover { background:#edf0e5; }
+.brew-button.primary { background:#536317; color:white; border-color:#536317; }
+.brew-button.primary:hover { background:#40500f; }
+.brew-button.quiet { background:transparent; }
+.brew-button:focus-visible, .brew-day-app input:focus-visible, .brew-day-app textarea:focus-visible, .brew-day-app select:focus-visible { outline:3px solid #b26a10; outline-offset:3px; }
+.brew-day-storage-note { font-size:12px; color:var(--brew-muted); max-width:820px; }
+.brew-day-message { background:#fff1d6; border-left:4px solid #a86411; padding:14px 18px; font-size:14px; margin:16px 0; }
+.brew-day-file-status { font-size:14px; color:var(--brew-olive); min-height:1.5em; margin:0 0 18px; overflow-wrap:anywhere; }
+.brew-panel { border:1px solid var(--brew-line); background:#fffefa; padding:28px; margin-bottom:24px; border-radius:5px; }
+.brew-section-heading { display:flex; align-items:baseline; gap:14px; margin-bottom:24px; }
+.brew-section-heading h2 { font-size:30px; margin:0; }
+.brew-stage-number { font:12px/1.5 monospace; color:var(--brew-olive); }
+.brew-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.brew-field { display:flex; flex-direction:column; gap:8px; font-size:13px; font-weight:600; min-width:0; margin:0; }
+.brew-field.full-width { grid-column:1/-1; }
+.brew-day-app input:not([type=checkbox]), .brew-day-app textarea, .brew-day-app select { box-sizing:border-box; width:100%; min-width:0; border:1px solid #b8c1b4; border-radius:3px; padding:11px 12px; background:white; color:#142b3a; font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+.brew-day-app textarea { min-height:104px; resize:vertical; }
+.brew-day-app input::placeholder, .brew-day-app textarea::placeholder { color:#67756c; opacity:1; }
+.brew-workspace { display:grid; grid-template-columns:160px minmax(0,1fr); gap:28px; align-items:start; }
+.brew-stage-nav { position:sticky; top:24px; padding-top:12px; }
+.brew-stage-nav .eyebrow { font-size:10px; margin-bottom:10px; }
+.brew-stage-nav p:not(.eyebrow) { color:var(--brew-muted); font-size:12px; line-height:1.6; margin-bottom:18px; }
+.brew-stage-nav a { display:block; font-size:13px; padding:10px 0; border-bottom:1px solid var(--brew-line); text-decoration:none; }
+.brew-stage-intro { color:var(--brew-muted); font-size:14px; }
+.brew-times { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-bottom:22px; }
+.brew-times label { min-width:0; }
+.brew-checks { display:grid; gap:4px; margin-bottom:26px; }
+.brew-check { display:flex; align-items:flex-start; gap:12px; padding:12px 8px; font-size:15px; line-height:1.6; cursor:pointer; margin:0; }
+.brew-check:hover { background:#f0f2e9; }
+.brew-check input { appearance:auto; width:22px; height:22px; min-width:22px; margin:1px 0 0; accent-color:#536317; cursor:pointer; }
+.brew-check:has(input:checked) { color:#50616a; background:#f0f2e9; }
+.brew-measurements { table-layout:fixed; border:0; margin:24px 0; font-size:13px; color:#142b3a; width:100%; }
+.brew-measurements th, .brew-measurements td { border:0; border-bottom:1px solid var(--brew-line); background:transparent; padding:10px 6px; text-align:left; overflow-wrap:anywhere; }
+.brew-measurements th:first-child { width:42%; padding-left:0; }
+.brew-measurements thead th { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--brew-muted); }
+.brew-measurements tbody th { font-size:13px; font-weight:500; }
+.brew-measurements tr:nth-child(even) { background:transparent; }
+.brew-measurements input { padding:10px 8px !important; }
+.brew-wrap-up { margin-left:188px; }
+.brew-day-app dialog { max-width:510px; width:calc(100% - 56px); border:1px solid #b8c1b4; border-radius:6px; background:#fbf9f3; color:#142b3a; padding:28px; box-sizing:border-box; }
+.brew-day-app dialog h2 { font-size:30px; }
+.brew-day-app dialog p { font-size:15px; }
+.brew-day-app dialog::backdrop { background:rgba(20,43,58,.5); }
+.brew-dialog-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.print-only { display:none; }
+.visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+@media (max-width:760px) {
+  .brew-workspace { grid-template-columns:1fr; gap:16px; }
+  .brew-stage-nav { position:static; display:flex; flex-wrap:wrap; gap:4px 16px; padding:0 0 12px; }
+  .brew-stage-nav p { width:100%; margin-bottom:4px !important; }
+  .brew-stage-nav a { padding:8px 0; }
+  .brew-wrap-up { margin-left:0; }
+}
+@media (max-width:480px) {
+  .brew-day-heading h1 { font-size:38px; }
+  .brew-day-lead { font-size:21px; }
+  .brew-panel { padding:20px 14px; }
+  .brew-section-heading { gap:10px; }
+  .brew-section-heading h2 { font-size:27px; }
+  .brew-fields { grid-template-columns:1fr; gap:16px; }
+  .brew-day-actions { width:100%; }
+  .brew-button { padding:10px 12px; }
+  .brew-measurements { font-size:12px; }
+  .brew-measurements th:first-child { width:36%; }
+  .brew-measurements th, .brew-measurements td { padding:10px 4px; }
+  .brew-measurements tbody th { font-size:12px; }
+  .brew-measurements input { padding:9px 5px !important; font-size:15px !important; }
+  .brew-measurements, .brew-measurements tbody { display:block; }
+  .brew-measurements thead { display:none; }
+  .brew-measurements tbody tr { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 12px; border-bottom:1px solid var(--brew-line); padding:14px 0; }
+  .brew-measurements tbody th:first-child { width:auto; grid-column:1/-1; border:0; padding:0 0 4px; font-size:13px; }
+  .brew-measurements td { border:0; padding:0; }
+  .brew-measurements td::before { content:'Target'; display:block; color:var(--brew-muted); font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+  .brew-measurements td:last-child::before { content:'Actual'; }
+
+}
+@page { size:auto; margin:14mm; }
+@media print {
+  body { background:white; color:black; font:10pt/1.4 Arial,sans-serif; }
+  .site-header, .site-footer, .skip-link, .screen-only, .brew-day-app dialog { display:none !important; }
+  .page-content, .wrapper { padding:0; margin:0; max-width:none; }
+  .print-only { display:block; }
+  .print-only h1 { font-size:24pt; margin:0 0 10pt; }
+  .print-only h2 { font-size:15pt; margin:20pt 0 8pt; break-after:avoid; }
+  .print-only h3 { font:600 10pt/1.4 Arial,sans-serif; margin:10pt 0 3pt; break-after:avoid; }
+  .print-only p { margin:0 0 8pt; }
+  .print-eyebrow, .print-footnote { color:#333; font-size:8pt; }
+  .print-details { display:grid; grid-template-columns:100pt 1fr; gap:4pt 8pt; margin:12pt 0; }
+  .print-details dt { font-weight:bold; }
+  .print-details dd { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .print-only ul { list-style:none; margin:8pt 0; padding:0; }
+  .print-only li { margin:3pt 0; break-inside:avoid; }
+  .print-only table { width:100%; color:black; font-size:9pt; margin:10pt 0; border-collapse:collapse; }
+  .print-only th, .print-only td { border:1px solid #bbb; padding:5pt; background:white !important; text-align:left; overflow-wrap:anywhere; }
+  .print-only tr { break-inside:avoid; }
+  .print-only th { font-weight:bold; }
+  .print-notes { white-space:pre-wrap; overflow-wrap:anywhere; }
+  .print-footnote { margin-top:20pt !important; border-top:1px solid #bbb; padding-top:8pt; }
+}
+
+.brew-day-units { font-size:14px; color:var(--brew-muted); }
+.brew-day-limitations { font-size:14px; margin:12px 0 20px; }
+.brew-day-limitations summary { cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+.brew-day-limitations p { margin:12px 0 0; }
+.brew-check-row { display:flex; align-items:flex-start; gap:8px; }
+.brew-check-row .brew-check { flex:1; min-width:0; }
+.brew-na { flex-shrink:0; min-height:44px; min-width:46px; margin-top:4px; padding:8px; border:1px solid #b8c1b4; border-radius:4px; background:white; color:#50616a; cursor:pointer; font:600 14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+.brew-na:hover, .brew-na[aria-pressed=true] { color:#40500f; border-color:#536317; background:#edf0e5; }
+.brew-na:focus-visible { outline:3px solid #b26a10; outline-offset:3px; }
+.brew-check-row.is-na .brew-check { color:#50616a; font-style:italic; }
+.brew-stage-nav .brew-na-help { font-size:14px; }
+@media (max-width:480px) { .brew-times { grid-template-columns:1fr; } }
+
+.brew-day-app select { appearance:none; padding-right:38px; }
+.brew-field:has(select) { position:relative; }
+.brew-field:has(select)::after { content:''; position:absolute; right:16px; bottom:21px; width:7px; height:7px; border-right:2px solid #50616a; border-bottom:2px solid #50616a; transform:rotate(45deg); pointer-events:none; }
+.brew-legacy-equipment { grid-column:1/-1; margin:0; font-size:14px; color:var(--brew-muted); overflow-wrap:anywhere; }
