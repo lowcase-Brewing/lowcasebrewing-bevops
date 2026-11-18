@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: handbook
+show_title: true
 title: Glossary
 ---
 

@@ -1,3 +1,9 @@
+---
+layout: handbook
+show_title: true
+title: "BEV-2026-002: Site outage"
+---
+
 BEV-2026-002
 
 Summary:

@@ -1,3 +1,8 @@
+---
+layout: handbook
+title: "Beer Development Life Cycle (BDLC)"
+---
+
 # Beer Development Life Cycle (BDLC)
 
 ## Overview

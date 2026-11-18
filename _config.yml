@@ -1,10 +1,15 @@
 title: BevOps
-description: DevOps-Inspired Principles for Brewing
+description: Good beer. Useful notes. Better next batches. Brewing resources and the BevOps Handbook from lowcase Brewing.
 url: https://bevops.lowcasebrewing.com
+lang: en
 
 markdown: kramdown
 theme: minima
 
-# Local working copies are not part of the published handbook.
+# The homepage now lives in index.html. README files describe the repository.
 exclude:
+  - README.md
   - "README copy.md"
+  - Gemfile
+  - Gemfile.lock
+  - vendor

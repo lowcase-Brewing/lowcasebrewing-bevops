@@ -1,3 +1,8 @@
+---
+layout: handbook
+title: "Incident Reports"
+---
+
 # Incident Reports
 
 ## Overview

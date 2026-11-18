@@ -1,3 +1,8 @@
+---
+layout: handbook
+title: "Service Level Indicators and Objectives (SLI/SLO)"
+---
+
 # Service Level Indicators and Objectives (SLI/SLO)
 
 ## Overview
