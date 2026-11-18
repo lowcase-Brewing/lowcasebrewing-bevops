@@ -52,6 +52,8 @@ p { margin-bottom: 20px; }
 .bevops-principles li::before { content: "0" counter(principle); position: absolute; left: 0; top: 3px; color: $olive; font: 12px/1.5 monospace; }
 .bevops-principles h3 { font-size: 19px; letter-spacing: -.015em; margin: 0 0 6px; }
 .bevops-principles p { font-size: 15px; line-height: 1.6; color: $muted; margin: 0; }
+.bevops-your-way { max-width: 780px; padding-top: 44px; }
+.bevops-your-way p:last-child { margin-bottom: 0; }
 .bevops-explore { padding: 60px 0; }
 .bevops-explore > h2 { margin-bottom: 30px; }
 .bevops-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
