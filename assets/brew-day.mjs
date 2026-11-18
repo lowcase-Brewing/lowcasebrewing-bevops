@@ -1,4 +1,4 @@
-import {BATCH_FIELDS,STAGES,WRAP_FIELDS,FIELD_DEFS,CHECK_IDS,STORAGE_KEY,MAX_FILE_BYTES,createBatch,parseBatch,serializeBatch,batchFilename,saveDraft} from './brew-day-core.mjs';
+import {BATCH_FIELDS,STAGES,WRAP_FIELDS,CHECK_IDS,STORAGE_KEY,MAX_FILE_BYTES,createBatch,parseBatch,serializeBatch,batchFilename,saveDraft} from './brew-day-core.mjs';
 
 const $=id=>document.getElementById(id);
 const el=(tag,text,className)=>{
@@ -70,7 +70,7 @@ function renderForm() {
       const key=stage.id+'-'+id;
       const label=el('label',undefined,'brew-check');
       const input=el('input'); input.type='checkbox'; input.name=key; input.checked=batch.checks[key]; input.dataset.check=key;
-      label.append(input,el('span',text)); checks.append(label);
+      label.append(input,el('span',batch.stepLabels[key])); checks.append(label);
     }
     section.append(checks);
     const table=el('table',undefined,'brew-measurements');
@@ -124,13 +124,13 @@ function askReplace(action) {
   pending=action;
   const importing=action.kind==='import';
   $('replace-title').textContent=importing?'Import this batch?':'Start a new batch?';
-  $('replace-description').textContent=importing?'Import “'+(action.batch.fields.batchId||action.batch.fields.recipe||'Untitled batch')+'” and replace the draft currently open in this browser.':'Start a fresh Punkin’ Monkey checklist with blank actuals and unchecked steps. This replaces the current draft.';
+  $('replace-description').textContent=importing?'Import “'+(action.batch.fields.batchId||action.batch.fields.recipe||'Untitled batch')+'” and replace the draft currently open in this browser.':'Start a fresh checklist with blank batch details, targets, and actuals, and unchecked steps. This replaces the current draft.';
   $('confirm-replace').textContent=importing?'Import and replace':'Start new batch';
   $('replace-dialog').showModal();
 }
 function printRecord() {
   const root=$('print-record');root.replaceChildren();
-  root.append(el('p','lowcase Brewing / BevOps','print-eyebrow'),el('h1','Brew-day record'),el('p','Punkin’ Monkey v1.0.0 checklist · use what helps.'));
+  root.append(el('p','lowcase Brewing / BevOps','print-eyebrow'),el('h1','Brew-day record'),el('p','Brew-day checklist · use what helps.'));
   const details=el('dl',undefined,'print-details');
   for(const f of BATCH_FIELDS) {details.append(el('dt',f.label),el('dd',batch.fields[f.id]||'Not recorded'));}
   root.append(details);
@@ -138,7 +138,7 @@ function printRecord() {
     const section=el('section',undefined,'print-stage');section.append(el('h2',stage.title));
     section.append(el('p','Started: '+(batch.fields[stage.id+'Start']||'Not recorded')+' / Finished: '+(batch.fields[stage.id+'Finish']||'Not recorded')));
     const steps=el('ul');
-    for(const [id,text] of stage.steps) steps.append(el('li',(batch.checks[stage.id+'-'+id]?'[x] ':'[ ] ')+text));
+    for(const [id,text] of stage.steps) steps.append(el('li',(batch.checks[stage.id+'-'+id]?'[x] ':'[ ] ')+batch.stepLabels[stage.id+'-'+id]));
     section.append(steps);
     const table=el('table');const head=el('tr');
     for(const text of ['Measurement','Target','Actual']) head.append(el('th',text));

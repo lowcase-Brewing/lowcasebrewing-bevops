@@ -1,21 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {createBatch,parseBatch,serializeBatch,validateBatch,saveDraft,batchFilename,STORAGE_KEY,MAX_FILE_BYTES} from '../assets/brew-day-core.mjs';
 
-test('a fresh batch has the runbook targets but no claimed actuals or completed steps',()=>{
+test('a fresh batch has no prescribed details, targets, ingredients, actuals, or completed steps',()=>{
   const batch=createBatch(new Date(2026,10,18,12));
-  assert.equal(batch.fields.brewDate,'2026-11-18');
-  assert.equal(batch.fields.rest1TempTarget,'147');
-  assert.equal(batch.fields.rest2TempTarget,'156');
-  assert.equal(batch.fields.ogTarget,'1.058–1.060');
-  assert.equal(batch.fields.rest1TempActual,'');
-  assert.equal(batch.fields.ogActual,'');
+  assert.ok(Object.values(batch.fields).every(value=>value===''));
   assert.ok(Object.values(batch.checks).every(value=>value===false));
+  assert.ok(Object.values(batch.stepLabels).every(value=>!(/Punkin|pumpkin|Hallertau|W-34|BrewZilla|60 min remaining|20 min remaining/.test(value))));
 });
 
 test('an exported batch round-trips measured values, amended targets, checks, Unicode, and long multiline notes',()=>{
   const batch=createBatch();
-  batch.fields.batchId='PM-003';
+  batch.fields.recipe='A different beer';
+  batch.fields.batchId='BATCH-003';
+  batch.fields.grainBill='Pale malt · 10 lb\nWheat malt · 1 lb';
+  batch.fields.additionNotes='Cascade · 1 oz · 30 minutes remaining';
+  batch.fields.yeast='Brewer-selected yeast';
   batch.fields.rest1TempTarget='148';
   batch.fields.rest1TempActual='147.8';
   batch.fields.ogActual='1.059';
@@ -29,12 +30,12 @@ test('normalizing an import creates an independent record',()=>{
   const restored=validateBatch(original);
   restored.fields.recipe='Different batch';
   restored.checks['prep-water']=true;
-  assert.equal(original.fields.recipe,'Punkin’ Monkey Festbier');
+  assert.equal(original.fields.recipe,'');
   assert.equal(original.checks['prep-water'],false);
 });
 
 test('unsupported formats and future schema versions are rejected',()=>{
-  for(const raw of [null,[],{},'text',{...createBatch(),version:2},{...createBatch(),templateId:'other'}]) assert.throws(()=>validateBatch(raw));
+  for(const raw of [null,[],{},'text',{...createBatch(),version:999},{...createBatch(),templateId:'other'}]) assert.throws(()=>validateBatch(raw));
   assert.throws(()=>parseBatch('not JSON'),/readable JSON/);
 });
 
@@ -69,6 +70,29 @@ test('blocked or full storage reports failure, while a successful write retains 
 });
 
 test('export filenames stay useful and cannot contain path separators',()=>{
-  const batch=createBatch();batch.fields.batchId='../../PM / 003';
-  assert.match(batchFilename(batch),/^\d{4}-\d{2}-\d{2}-PM-003\.bevops\.json$/);
+  const batch=createBatch();batch.fields.brewDate='2026-11-18';batch.fields.batchId='../../BATCH / 003';
+  assert.match(batchFilename(batch),/^\d{4}-\d{2}-\d{2}-BATCH-003\.bevops\.json$/);
+});
+
+
+test('earlier batch files retain their values and original checklist wording during migration',()=>{
+  const legacy=JSON.parse(readFileSync(new URL('./fixtures/punkin-monkey-v1.json',import.meta.url),'utf8'));
+  const migrated=parseBatch(JSON.stringify(legacy));
+  assert.equal(migrated.version,2);
+  assert.equal(migrated.templateId,'generic-brew-day-v1');
+  for(const [id,value] of Object.entries(legacy.fields)) assert.equal(migrated.fields[id],value,id);
+  assert.deepEqual(migrated.checks,legacy.checks);
+  assert.equal(migrated.fields.grainBill,'');
+  assert.equal(migrated.stepLabels['boil-hop60'],'60 min remaining: add 1.0 oz Hallertau Mittelfrüh.');
+  assert.equal(migrated.stepLabels['mash-dough'],'Slowly add grains, rice hulls, and roasted pumpkin; stir out dry pockets.');
+  assert.deepEqual(parseBatch(serializeBatch(migrated)),migrated);
+});
+
+test('invalid historical files and damaged label snapshots are rejected',()=>{
+  const legacy=JSON.parse(readFileSync(new URL('./fixtures/punkin-monkey-v1.json',import.meta.url),'utf8'));
+  delete legacy.fields.mashNotes;
+  assert.throws(()=>validateBatch(legacy));
+  const batch=createBatch();
+  delete batch.stepLabels['prep-water'];
+  assert.throws(()=>validateBatch(batch));
 });

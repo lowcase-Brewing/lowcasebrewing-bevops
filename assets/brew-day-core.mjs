@@ -1,77 +1,80 @@
 export const APP = 'bevops-brew-day';
-export const VERSION = 1;
-export const TEMPLATE = 'punkin-monkey-v1';
+export const VERSION = 2;
+export const TEMPLATE = 'generic-brew-day-v1';
+// Keep the existing storage key so earlier drafts can be restored and migrated.
 export const STORAGE_KEY = 'bevops.brew-day.v1';
 export const MAX_FILE_BYTES = 1024 * 1024;
 
 const field = (id, label, value = '', type = 'text', extra = {}) => ({id, label, value, type, ...extra});
 export const BATCH_FIELDS = [
-  field('recipe', 'Beer / recipe', 'Punkin’ Monkey Festbier'),
-  field('recipeVersion', 'Recipe version', '1.0.0'),
-  field('batchId', 'Batch ID', '', 'text', {placeholder: 'e.g. PM-2026-003'}),
+  field('recipe', 'Beer / recipe'),
+  field('recipeVersion', 'Recipe version'),
+  field('batchId', 'Batch ID'),
   field('brewDate', 'Brew date', '', 'date'),
   field('brewer', 'Brewer'),
-  field('equipment', 'Equipment', 'BrewZilla')
+  field('equipment', 'Equipment')
 ];
 
-// Adapted from the current Punkin’ Monkey Festbier v1 runbook. This is a
-// recording aid, not a recipe calculator or a replacement for that runbook.
+// Optional recording checkpoints: targets and actuals are supplied by the brewer.
 export const STAGES = [
-  {id:'prep', title:'Water & setup', short:'Setup', intro:'Stage the ingredients and equipment. Leave room for the realities of your own setup.',
+  {id:'prep', title:'Water & setup', short:'Setup', intro:'Stage your ingredients and equipment, and prepare the water for your brewing process.',
     steps:[
-      ['equipment', 'Inspect the kettle and stage pump, recirculation hardware, and chiller.'],
-      ['ingredients', 'Stage grains, rice hulls, roasted pumpkin, hops, spices, and yeast.'],
-      ['water', 'Prepare strike water and any treatment appropriate to your source water.'],
-      ['sparge', 'Heat sparge water separately; use only what is needed to reach pre-boil volume.']
+      ['equipment', 'Inspect and stage the equipment needed for this batch.'],
+      ['ingredients', 'Measure and stage fermentables, hops, yeast, and any other planned ingredients.'],
+      ['water', 'Prepare brewing water and any treatment appropriate to your source water.'],
+      ['sparge', 'Prepare additional water for sparging or volume adjustments, if needed.']
     ],
-    measures:[['strike', 'Strike water', '5.25', 'gal'], ['spargeTemp', 'Sparge-water temperature', '168', '°F']],
-    fields:[field('ingredientsNotes', 'Ingredients, substitutions & water additions', '', 'textarea', {placeholder:'What went into this batch? Note any changes from the recipe.'})]
+    measures:[['strike', 'Initial brewing water', '', 'gal'], ['spargeTemp', 'Sparge-water temperature', '', '°F']],
+    fields:[
+      field('grainBill', 'Grain bill / fermentables', '', 'textarea', {placeholder:'Ingredient · amount. Include grains, malt extracts, sugars, or other fermentables used in this batch.'}),
+      field('ingredientsNotes', 'Water treatments & ingredient substitutions', '', 'textarea', {placeholder:'Record water additions and treatments, substitutions, and anything you prepared differently.'})
+    ]
   },
-  {id:'mash', title:'Mash', short:'Mash', intro:'Punkin’ Monkey uses a two-step mash. Keep recirculation gentle through the pumpkin-heavy grain bed.',
+  {id:'mash', title:'Mash', short:'Mash', intro:'Use the rests that apply to your recipe. Skip this stage if you are not mashing; note any additional rests below.',
     steps:[
-      ['dough', 'Slowly add grains, rice hulls, and roasted pumpkin; stir out dry pockets.'],
-      ['settle', 'Let the grain bed settle, then begin gentle recirculation.'],
-      ['rest1', 'Complete the first mash rest.'],
-      ['rest2', 'Complete the second mash rest.'],
-      ['out', 'Complete mash-out.']
+      ['dough', 'Combine the grain and water according to your recipe; stir out dry pockets.'],
+      ['settle', 'Set up the grain bed and any recirculation appropriate to your equipment.'],
+      ['rest1', 'Complete the main mash rest.'],
+      ['rest2', 'Complete an additional mash rest, if planned.'],
+      ['out', 'Complete mash-out, if used.']
     ],
-    measures:[['rest1Temp','First rest temperature','147','°F'], ['rest1Minutes','First rest duration','45','min'], ['rest2Temp','Second rest temperature','156','°F'], ['rest2Minutes','Second rest duration','15','min'], ['mashOutTemp','Mash-out temperature','168','°F'], ['mashOutMinutes','Mash-out duration','10','min'], ['mashPh','Mash pH','5.2–5.4','pH']],
+    measures:[['rest1Temp','First rest temperature','','°F'], ['rest1Minutes','First rest duration','','min'], ['rest2Temp','Second rest temperature','','°F'], ['rest2Minutes','Second rest duration','','min'], ['mashOutTemp','Mash-out temperature','','°F'], ['mashOutMinutes','Mash-out duration','','min'], ['mashPh','Mash pH','','pH']],
     fields:[]
   },
-  {id:'lauter', title:'Lauter & pre-boil', short:'Pre-boil', intro:'Measure both volume and gravity before deciding whether anything needs adjusting.',
+  {id:'lauter', title:'Lauter & pre-boil', short:'Pre-boil', intro:'For an all-grain batch, record your wort collection here. Skip grain-separation steps if they do not apply.',
     steps:[
-      ['lift', 'Turn off the pump, lift the malt pipe slowly, and allow it to drain.'],
-      ['sparge', 'Sparge gently and stop at the planned pre-boil volume.'],
-      ['sample', 'Stir the wort and take a representative gravity sample.'],
+      ['lift', 'Separate the wort from the grain using your brewing setup.'],
+      ['sparge', 'Sparge if needed, stopping at the planned pre-boil volume.'],
+      ['sample', 'Mix the wort thoroughly and take a representative gravity sample.'],
       ['record', 'Record pre-boil volume and gravity; note sample temperature or correction.']
     ],
-    measures:[['preVolume','Pre-boil volume','6.5','gal'], ['preGravity','Pre-boil gravity','','SG']],
+    measures:[['preVolume','Pre-boil volume','','gal'], ['preGravity','Pre-boil gravity','','SG']],
     fields:[field('gravityMethod','Gravity instrument / sample correction', '', 'text', {placeholder:'e.g. hydrometer; sample cooled to calibration temperature'})]
   },
-  {id:'boil', title:'Boil & flameout', short:'Boil', intro:'Times below are minutes remaining in the boil. Check your recipe and product directions for additions.',
+  {id:'boil', title:'Boil & flameout', short:'Boil', intro:'Record your own hop and other-additions schedule below, including amounts and timing. Skip additions or holds that are not part of this batch.',
     steps:[
-      ['start', 'Establish a steady boil and start the boil timer.'],
-      ['hop60', '60 min remaining: add 1.0 oz Hallertau Mittelfrüh.'],
-      ['hop20', '20 min remaining: add 0.5 oz Hallertau Mittelfrüh; sanitize the immersion chiller.'],
-      ['fining10', '10 min remaining: add the planned fining and optional nutrient.'],
-      ['flameout', 'At flameout: turn off heat and add the planned spices.'],
-      ['steep', 'Finish the spice steep before chilling.']
+      ['start', 'Establish a steady boil and start the planned boil timer.'],
+      ['hop60', 'Make the first planned hop addition at its scheduled time.'],
+      ['hop20', 'Make later hop additions and prepare the chilling equipment, as applicable.'],
+      ['fining10', 'Add any planned finings, nutrients, or other kettle additions at their scheduled times.'],
+      ['flameout', 'Turn off the heat and make any planned flameout additions.'],
+      ['steep', 'Complete any planned steep or whirlpool hold before chilling.']
     ],
-    measures:[['boilMinutes','Boil duration','60','min'], ['steepMinutes','Flameout steep','10','min']],
-    fields:[field('hopAlpha','Actual hop alpha acids (%)'), field('additionNotes','Boil additions & actual times', '', 'textarea', {value:'Planned at 10 min: ½ Whirlfloc tablet; optional 2–2.5 g Fermaid O.\nFlameout: 1 cinnamon stick, ¼ tsp fresh nutmeg, 1 tsp fresh ginger, ¼ tsp allspice.\nActual additions / changes:'})]
+    measures:[['boilMinutes','Boil duration','','min'], ['steepMinutes','Flameout / whirlpool hold','','min']],
+    fields:[field('hopAlpha','Hop varieties / actual alpha acids (%)'), field('additionNotes','Hop schedule & other additions', '', 'textarea', {placeholder:'Ingredient · amount · timing (say whether minutes remaining or elapsed). Record actual additions and any changes, too.'})]
   },
-  {id:'transfer', title:'Chill, transfer & pitch', short:'Transfer', intro:'Confirm the wort has reached the planned pitch temperature before pitching. A delay can be recorded here.',
+  {id:'transfer', title:'Chill, transfer & pitch', short:'Transfer', intro:'Use the pitching and fermentation conditions appropriate to your recipe and chosen yeast.',
     steps:[
       ['sanitize', 'Confirm the fermenter, transfer tubing, and sampling equipment are sanitized.'],
-      ['chill', 'Chill toward the planned pitch temperature; finish chilling in the chamber if needed.'],
+      ['chill', 'Chill the wort to the planned pitch temperature.'],
       ['transfer', 'Transfer to the fermenter and record the volume.'],
       ['og', 'Measure and record original gravity, with sample correction if needed.'],
       ['pitch', 'Confirm pitch temperature and add yeast according to the chosen yeast instructions.'],
-      ['control', 'Seal the fermenter, fit the airlock, and place it under temperature control.'],
+      ['control', 'Seal the fermenter and set up the planned fermentation conditions.'],
       ['cleanup', 'Clean equipment and record anything worth changing next time.']
     ],
-    measures:[['fermenterVolume','Volume into fermenter','5.0','gal'], ['og','Original gravity','1.058–1.060','SG'], ['pitchTemp','Pitch temperature','48–50','°F'], ['chamberTemp','Initial chamber setting','50','°F']],
-    fields:[field('yeast','Yeast / amount', '2 × 11.5 g SafLager W-34/70'), field('pitchTime','Pitch date & time','','datetime-local')]
+    measures:[['fermenterVolume','Volume into fermenter','','gal'], ['og','Original gravity','','SG'], ['pitchTemp','Pitch temperature','','°F'], ['chamberTemp','Fermentation temperature setting','','°F']],
+    fields:[field('yeast','Yeast / amount'), field('pitchTime','Pitch date & time','','datetime-local')]
   }
 ];
 
@@ -102,27 +105,58 @@ const validDay = value => /^\d{4}-\d{2}-\d{2}$/.test(value) && Number(value.slic
 
 export function createBatch(now = new Date()) {
   const stamp=now.toISOString();
-  const localDate = [now.getFullYear(), String(now.getMonth()+1).padStart(2,'0'), String(now.getDate()).padStart(2,'0')].join('-');
   return {app:APP,version:VERSION,templateId:TEMPLATE,createdAt:stamp,updatedAt:stamp,
-    fields:Object.fromEntries(FIELD_DEFS.map(f=>[f.id,f.id==='brewDate'?localDate:f.value])),
-    checks:Object.fromEntries(CHECK_IDS.map(id=>[id,false]))};
+    fields:Object.fromEntries(FIELD_DEFS.map(f=>[f.id,f.value])),
+    checks:Object.fromEntries(CHECK_IDS.map(id=>[id,false])),
+    stepLabels:Object.fromEntries(STAGES.flatMap(s=>s.steps.map(([id,text])=>[s.id+'-'+id,text])))};
 }
 
+// Preserve the historical checklist wording when reopening version-1 records.
+const LEGACY_STEP_LABELS = {
+  "prep-equipment": "Inspect the kettle and stage pump, recirculation hardware, and chiller.",
+  "prep-ingredients": "Stage grains, rice hulls, roasted pumpkin, hops, spices, and yeast.",
+  "prep-water": "Prepare strike water and any treatment appropriate to your source water.",
+  "prep-sparge": "Heat sparge water separately; use only what is needed to reach pre-boil volume.",
+  "mash-dough": "Slowly add grains, rice hulls, and roasted pumpkin; stir out dry pockets.",
+  "mash-settle": "Let the grain bed settle, then begin gentle recirculation.",
+  "mash-rest1": "Complete the first mash rest.",
+  "mash-rest2": "Complete the second mash rest.",
+  "mash-out": "Complete mash-out.",
+  "lauter-lift": "Turn off the pump, lift the malt pipe slowly, and allow it to drain.",
+  "lauter-sparge": "Sparge gently and stop at the planned pre-boil volume.",
+  "lauter-sample": "Stir the wort and take a representative gravity sample.",
+  "lauter-record": "Record pre-boil volume and gravity; note sample temperature or correction.",
+  "boil-start": "Establish a steady boil and start the boil timer.",
+  "boil-hop60": "60 min remaining: add 1.0 oz Hallertau Mittelfrüh.",
+  "boil-hop20": "20 min remaining: add 0.5 oz Hallertau Mittelfrüh; sanitize the immersion chiller.",
+  "boil-fining10": "10 min remaining: add the planned fining and optional nutrient.",
+  "boil-flameout": "At flameout: turn off heat and add the planned spices.",
+  "boil-steep": "Finish the spice steep before chilling.",
+  "transfer-sanitize": "Confirm the fermenter, transfer tubing, and sampling equipment are sanitized.",
+  "transfer-chill": "Chill toward the planned pitch temperature; finish chilling in the chamber if needed.",
+  "transfer-transfer": "Transfer to the fermenter and record the volume.",
+  "transfer-og": "Measure and record original gravity, with sample correction if needed.",
+  "transfer-pitch": "Confirm pitch temperature and add yeast according to the chosen yeast instructions.",
+  "transfer-control": "Seal the fermenter, fit the airlock, and place it under temperature control.",
+  "transfer-cleanup": "Clean equipment and record anything worth changing next time."
+};
+
 export function validateBatch(raw) {
-  if (!isRecord(raw) || raw.app!==APP || raw.version!==VERSION || raw.templateId!==TEMPLATE) {
+  const legacy=isRecord(raw) && raw.version===1 && raw.templateId==='punkin-monkey-v1';
+  if (!isRecord(raw) || raw.app!==APP || (!legacy && (raw.version!==VERSION || raw.templateId!==TEMPLATE))) {
     throw new Error('Choose a BevOps brew-day batch file exported by this version of the prototype.');
   }
   if (!validTimestamp(raw.createdAt) || !validTimestamp(raw.updatedAt) || !isRecord(raw.fields) || !isRecord(raw.checks)) {
     throw new Error('The batch file is incomplete or has invalid dates. Your current draft is unchanged.');
   }
-  const fieldKeys=FIELD_DEFS.map(f=>f.id);
+  const fieldKeys=FIELD_DEFS.filter(f=>!legacy || f.id!=='grainBill').map(f=>f.id);
   const exactKeys=(obj,keys)=>Object.keys(obj).length===keys.length && keys.every(key=>Object.hasOwn(obj,key));
   if (!exactKeys(raw.fields,fieldKeys) || !exactKeys(raw.checks,CHECK_IDS)) {
     throw new Error('The batch file has missing or unrecognized fields. Your current draft is unchanged.');
   }
   const fields={};
   for (const f of FIELD_DEFS) {
-    const value=raw.fields[f.id];
+    const value=legacy && f.id==='grainBill'?'':raw.fields[f.id];
     if (typeof value!=='string' || value.length>(f.type==='textarea'?10000:300)) {
       throw new Error('The batch file has an invalid or oversized field. Your current draft is unchanged.');
     }
@@ -138,7 +172,14 @@ export function validateBatch(raw) {
     if (typeof raw.checks[id]!=='boolean') throw new Error('A checklist entry is invalid. Your current draft is unchanged.');
     checks[id]=raw.checks[id];
   }
-  return {app:APP,version:VERSION,templateId:TEMPLATE,createdAt:raw.createdAt,updatedAt:raw.updatedAt,fields,checks};
+  const labels=legacy?LEGACY_STEP_LABELS:raw.stepLabels;
+  if (!isRecord(labels) || !exactKeys(labels,CHECK_IDS)) throw new Error('The batch file has an invalid checklist. Your current draft is unchanged.');
+  const stepLabels={};
+  for (const id of CHECK_IDS) {
+    if (typeof labels[id]!=='string' || !labels[id].trim() || labels[id].length>500) throw new Error('The batch file has an invalid checklist label. Your current draft is unchanged.');
+    stepLabels[id]=labels[id];
+  }
+  return {app:APP,version:VERSION,templateId:TEMPLATE,createdAt:raw.createdAt,updatedAt:raw.updatedAt,fields,checks,stepLabels};
 }
 
 export function parseBatch(text) {

@@ -12,7 +12,7 @@ This is a small, growing collection. We explain what each resource can help with
 
 ### [Brew-day notebook prototype]({{ '/brew-day/' | relative_url }})
 
-A checklist and batch record based on our Punkin’ Monkey runbook. Record actual measurements, keep notes, export or import a batch file, and print the record. Your draft stays in this browser; export it to keep your own copy.
+A beer-agnostic checklist and batch record for your own recipe, ingredients, and targets. Record actual measurements, keep notes, export or import a batch file, and print the record. Your draft stays in this browser; export it to keep your own copy.
 
 ## Calculators we're exploring
 

@@ -42,15 +42,17 @@ Local changes and preview builds do not publish the site. Merge only after revie
 
 ## Brew-day notebook prototype
 
-The local feature at `/brew-day/` is a browser-only batch checklist based on the current **Punkin’ Monkey Festbier v1.0.0** runbook (read from Google Docs on 2026-11-18). It follows setup, a 147°F/45-minute and 156°F/15-minute step mash, 168°F/10-minute mash-out, pre-boil measurements, the boil, and chill/transfer/pitch. It is a recording aid; it does not calculate recipes or replace the full runbook. Target values are editable. Actuals begin blank and no checkbox is mandatory.
+The local feature at `/brew-day/` is a beer-agnostic, browser-only batch checklist. New batches start with blank details (including date), targets, actuals, ingredients, additions, and yeast. Its optional stages cover setup, mash rests, pre-boil measurements, boil, and chill/transfer/pitch. Use the steps that apply to the brewer's process; record extra rests and deviations in the notes. It is a recording aid, not a recipe calculator.
 
-- `assets/brew-day-core.mjs` defines the example, versioned batch-file schema, import validation, and storage writer.
+Setup includes a grain bill/fermentables field and separate notes for water treatment and substitutions. The boil section has space for the brewer's own hop schedule and other additions, including amounts and timing. No equipment, quantities, rest temperatures, boil durations, or yeast strains are prescribed.
+
+- `assets/brew-day-core.mjs` defines the generic checklist, versioned batch-file schema, import validation, and storage writer.
 - `assets/brew-day.mjs` builds the form, autosaves input, handles file actions, and builds a separate print record with all entered text.
 - `assets/brew-day.css` contains screen and print styles.
 
 One active draft is saved under `bevops.brew-day.v1` in localStorage. Storage is scoped to browser, device, and origin (including the local preview port). There is no server submission, user account, analytics, or cloud sync. Once loaded, the notebook can keep working without connectivity; reopening/reloading still requires access to the site. No service worker is installed.
 
-Export creates a `.bevops.json` batch file. Import validates its version, template, field names/types, size, and date/time fields before asking to replace the draft. New batch also asks before replacing the draft. Invalid stored data is retained for a recovery download; blocked or full storage produces an explicit unsaved status. A change from another tab pauses autosave so stale tabs cannot silently overwrite newer work. Export before switching batches, clearing browser data, or closing a private window.
+Export creates a version-2 `.bevops.json` batch file. Existing version-1 Punkin’ Monkey drafts and exports are migrated when opened, preserving all recorded values, checks, notes, and the original checklist wording; the new grain-bill field starts blank. Version-2 files snapshot checklist labels so historical records retain their meaning when wording evolves. The storage key is deliberately retained for migration. To start blank instead of restoring an existing record, choose **New batch** after exporting anything you want to keep. Import validates its version, template, field names/types, size, and date/time fields before asking to replace the draft. New batch also asks before replacing the draft. Invalid stored data is retained for a recovery download; blocked or full storage produces an explicit unsaved status. A change from another tab pauses autosave so stale tabs cannot silently overwrite newer work. Export before switching batches, clearing browser data, or closing a private window.
 
 Use **Print / PDF**, then the browser's print dialog to print or save as PDF. The print stylesheet includes checked and unchecked steps, targets, actuals, metadata, and full notes rather than clipped input controls. Export JSON as well if you want to edit the record later.
 
