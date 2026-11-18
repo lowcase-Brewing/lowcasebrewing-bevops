@@ -1,3 +1,8 @@
+---
+layout: handbook
+title: "Observability & Metrics"
+---
+
 # Observability & Metrics
 
 ## Overview

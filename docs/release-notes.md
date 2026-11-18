@@ -1,3 +1,8 @@
+---
+layout: handbook
+title: "Release Notes"
+---
+
 # Release Notes
 
 ## Overview

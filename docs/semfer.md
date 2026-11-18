@@ -1,3 +1,8 @@
+---
+layout: handbook
+title: "Semantic Fermentioning (SemFer)"
+---
+
 # Semantic Fermentioning (SemFer)
 
 ## Overview

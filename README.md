@@ -1,49 +1,41 @@
-![lowcase Brewing BevOps logo](assets/media/bevops.png)
+# lowcase Brewing / BevOps
 
-# BevOps
+The source for [bevops.lowcasebrewing.com](https://bevops.lowcasebrewing.com): an introduction to BevOps, a brewing resources collection, and the BevOps Handbook.
 
-*“BevOps applies DevOps principles to brewing to improve repeatability, observability, and continuous improvement while preserving the creativity and experimentation that make homebrewing enjoyable.”*
+## Site structure
 
-**Brew → Iterate → Improve → Enjoy**
+- `index.html` — homepage and short manifesto.
+- `resources/index.md` — annotated brewing tools and references.
+- `handbook/index.md` — the original handbook overview and chapter index.
+- `docs/` — existing handbook chapters, retaining their `.html` URLs.
+- `_includes/` and `_layouts/` — shared navigation, footer, and page structure.
+- `assets/main.scss` — shared styles; `assets/media/` contains the existing BevOps logo.
 
-## Overview
+## Preview locally
 
-BevOps is a framework that applies DevOps-inspired principles to brewing in order to improve repeatability, observability, and continuous improvement while preserving the creativity that makes homebrewing enjoyable.
+Use a current Ruby installation with Bundler. The Gemfile matches the Jekyll and Minima versions used by GitHub Pages.
 
-The purpose of BevOps is not to eliminate creativity from brewing. The purpose of BevOps is to document creativity so it can be repeated, improved, and shared.
+```sh
+bundle install
+bundle exec jekyll serve --host 127.0.0.1 --port 4000
+```
 
-## Core Concepts
+Open <http://127.0.0.1:4000/>. Jekyll rebuilds when content changes; refresh the browser to see updates. Restart the server after changing `_config.yml`.
 
-- Beer Development Life Cycle (BDLC)
-- Semantic Fermentioning (SemFer)
-- Release Notes
-- Service Level Indicators and Objectives (SLI/SLO)
-- Brewing Operations Reliability Assessment (BORA)
-- Incident Reports
+For a build without a server:
 
-## Documentation
+```sh
+bundle exec jekyll build
+```
 
-- [Philosophy](docs/philosophy.md)
-- [Beer Development Life Cycle](docs/bdlc.md)
-- [Semantic Fermentioning](docs/semfer.md)
-- [Release Notes](docs/release-notes.md)
-- [SLI/SLO](docs/sli-slo.md)
-- [BORA](docs/bora.md)
-- [Incident Reports](docs/incident-reports.md)
-- [Infrastructure Roadmap](docs/infrastructure-roadmap.md)
-- [Observability & Metrics](docs/observability.md)
-- [Glossary](docs/glossary.md)
+Check the homepage, resources page, handbook index, and a handbook chapter at desktop and phone widths before merging. Confirm keyboard navigation and links back to the main lowcase site.
 
-## Current Version
+## Editing content
 
-v0.1.0-alpha
+Keep resource descriptions specific and honest about what we've used versus what we're exploring. Link to original sources. Recheck external tools' access requirements when updating their entries.
 
-## Status
+The complete handbook introduction previously shown on the homepage is preserved in `handbook/index.md`. Existing chapter content remains in `docs/`; YAML front matter supplies layout and page titles.
 
-Active development.
+`README copy.md` is a local working copy excluded from publication. It is not the homepage or handbook source.
 
-## Philosophy
-
-Readers should take the principles documented in BevOps as guidelines and not hard, fast rules. The goal of BevOps is to establish principles at a high level while leaving room for flexibility in how they are implemented.
-
-For the full handbook, start with the documentation links above.
+Local changes and preview builds do not publish the site. Merge only after review; publishing remains with the repository's existing GitHub Pages configuration.

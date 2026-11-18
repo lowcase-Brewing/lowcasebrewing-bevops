@@ -1,3 +1,8 @@
+---
+layout: handbook
+title: "Brewing Operations Reliability Assessment (BORA)"
+---
+
 # Brewing Operations Reliability Assessment (BORA)
 
 ## Overview
